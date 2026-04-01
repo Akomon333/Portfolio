@@ -3,249 +3,1194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Official website of Akim Stsemelinin</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Akim Stsemelinin — Applied ML & Civic Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafaf9;
+            --bg-secondary: #f5f5f4;
+            --surface: #ffffff;
+            --text: #1c1917;
+            --text-secondary: #78716c;
+            --orange: #ea580c;
+            --orange-light: #ffedd5;
+            --orange-dark: #9a3412;
+            --stone: #57534e;
+            --border: #e7e5e4;
+            --success: #059669;
+            --shadow: rgba(28, 25, 23, 0.04);
+            
+            /* Math constants as easter eggs */
+            --pi: 3.14159265359;
+            --e: 2.71828182846;
+            --phi: 1.61803398875;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0c0a09;
+                --bg-secondary: #1c1917;
+                --surface: #292524;
+                --text: #fafaf9;
+                --text-secondary: #a8a29e;
+                --orange: #fb923c;
+                --orange-light: #431407;
+                --border: #44403c;
+                --shadow: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-feature-settings: "liga" 1, "calt" 1;
+        }
+
+        body {
+            font-family: 'STIX Two Text', Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+            counter-reset: theorem;
+        }
+
+        /* Mathematical annotation style */
+        .math {
+            font-family: 'STIX Two Text', serif;
+            font-style: italic;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(250, 250, 249, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            transition: all 0.3s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            header {
+                background: rgba(12, 10, 9, 0.9);
+            }
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .logo-symbol {
+            width: 32px;
+            height: 32px;
+            background: var(--orange);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'STIX Two Text', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            transition: transform 0.2s;
+        }
+
+        .logo:hover .logo-symbol {
+            transform: rotate(90deg);
+        }
+
+        /* Secret terminal mode activation */
+        body.terminal-mode {
+            --bg: #000;
+            --text: #0f0;
+            --orange: #0f0;
+            --bg-secondary: #111;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        body.terminal-mode .logo-symbol {
+            background: #0f0;
+            color: #000;
+        }
+
+        body.terminal-mode .math,
+        body.terminal-mode h1,
+        body.terminal-mode h2,
+        body.terminal-mode p {
+            font-family: 'JetBrains Mono', monospace;
+            font-style: normal;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 4px;
+            margin-left: 32px;
+            padding-left: 32px;
+            border-left: 1px solid var(--border);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            color: var(--text);
+            background: var(--bg-secondary);
+        }
+
+        .lang-btn.active {
+            color: var(--orange);
+            font-weight: 600;
+            background: var(--orange-light);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 5% 80px;
+        }
+
+        /* Hero Section - Mathematical Layout */
+        .hero {
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '∫';
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 200px;
+            color: var(--orange);
+            opacity: 0.05;
+            font-family: 'STIX Two Text', serif;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-meta::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 2px;
+            background: var(--orange);
+        }
+
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        h1 .accent {
+            color: var(--orange);
+            position: relative;
+        }
+
+        h1 .accent::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--orange-light);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+        }
+
+        /* Startup Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .metric {
+            position: relative;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-delta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--success);
+            margin-top: 4px;
+        }
+
+        /* Section styling */
+        section {
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--orange);
+            font-weight: 600;
+        }
+
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Text content */
+        .lead {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Theorem/Project Cards */
+        .theorem {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px var(--shadow);
+            transition: all 0.3s;
+            position: relative;
+            counter-increment: theorem;
+        }
+
+        .theorem::before {
+            content: 'Thm. ' counter(theorem);
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--orange);
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .theorem:hover {
+            box-shadow: 0 4px 12px var(--shadow);
+            border-color: var(--orange);
+            transform: translateY(-2px);
+        }
+
+        .theorem-header {
+            margin-bottom: 16px;
+            padding-top: 8px;
+        }
+
+        .theorem-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .theorem-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-secondary);
+        }
+
+        .tag.primary {
+            background: var(--orange-light);
+            border-color: var(--orange);
+            color: var(--orange-dark);
+        }
+
+        .theorem-content {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .theorem-content ul {
+            margin: 16px 0;
+            margin-left: 20px;
+        }
+
+        .theorem-content li {
+            margin-bottom: 8px;
+        }
+
+        .proof {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--orange);
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .proof-label {
+            font-weight: 600;
+            color: var(--orange);
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .theorem-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .complexity {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .theorem-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .theorem-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--orange);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+
+        .theorem-link:hover {
+            gap: 10px;
+            text-decoration: underline;
+        }
+
+        /* Skills - Set notation style */
+        .skills-set {
+            font-family: 'STIX Two Text', serif;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--text-secondary);
+            margin: 24px 0;
+            padding: 24px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .skills-set .set-name {
+            font-weight: 600;
+            color: var(--orange);
+            font-family: 'JetBrains Mono', monospace;
+            font-style: normal;
+        }
+
+        .skills-set .element {
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            padding: 2px 8px;
+            margin: 0 4px;
+            background: var(--surface);
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        /* Interests - Discrete math style */
+        .interests {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .interest-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .interest-item:hover {
+            border-color: var(--orange);
+            transform: translateX(4px);
+        }
+
+        .interest-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            color: var(--orange);
+        }
+
+        .interest-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .interest-content h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+
+        .interest-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .interest-content a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        .interest-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Chess Easter Egg */
+        .chess-hidden {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .chess-hidden.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 5%;
+            margin-top: 100px;
+            background: var(--bg-secondary);
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .footer-col p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--orange);
+        }
+
+        .footer-bottom {
+            max-width: 900px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .interests { grid-template-columns: 1fr; }
+            .theorem-footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        /* Selection color easter egg (golden ratio) */
+        ::selection {
+            background: var(--orange-light);
+            color: var(--orange-dark);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--orange);
+        }
+
+        /* Konami code indicator */
+        .konami-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 8px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 50%;
+            transition: background 0.3s;
+            z-index: 999;
+        }
+
+        .konami-indicator.active {
+            background: var(--orange);
+            box-shadow: 0 0 10px var(--orange);
+        }
+    </style>
 </head>
 <body>
-    <div class="scroll-indicator" id="scrollIndicator"></div>
+    <div class="konami-indicator" id="konami"></div>
 
-    <header id="header">
-        <nav>
-            <div class="logo" data-en="Akim Stsemelinin" data-et="Akim Štšemelinin" data-ru="Аким Щемелинин" data-de="Akim Stsemelinin">Akim Stsemelinin</div>
+    <header>
+        <a href="#" class="logo" onclick="toggleTerminal(event)" title="Click 3 times for terminal mode">
+            <div class="logo-symbol">λ</div>
+            <span style="font-family: 'Inter', sans-serif;" data-en="Akim Stsemelinin" data-et="Akim Štšemelinin" data-ru="Аким Щемелинин" data-de="Akim Stsemelinin">Akim Stsemelinin</span>
+        </a>
+        
+        <div style="display: flex; align-items: center;">
+            <nav class="nav-links">
+                <a href="#about" data-en="About" data-et="Minust" data-ru="Обо мне" data-de="Über mich">About</a>
+                <a href="#theorems" data-en="Work" data-et="Tööd" data-ru="Работы" data-de="Arbeiten">Work</a>
+                <a href="#contact" data-en="Contact" data-et="Kontakt" data-ru="Контакт" data-de="Kontakt">Contact</a>
+            </nav>
+            
             <div class="lang-switcher">
                 <button class="lang-btn active" onclick="setLang('en')">EN</button>
                 <button class="lang-btn" onclick="setLang('et')">ET</button>
                 <button class="lang-btn" onclick="setLang('ru')">RU</button>
                 <button class="lang-btn" onclick="setLang('de')">DE</button>
             </div>
-        </nav>
+        </div>
     </header>
 
     <div class="container">
         <section class="hero">
             <div class="hero-content">
-                <div class="hero-text">
-                    <h1 data-en="Bridging Technology & Civic Leadership" data-et="Ühendades tehnoloogia ja kodanikujuhtimise" data-ru="Объединяя технологии и гражданское лидерство" data-de="Technologie & bürgerschaftlichem Engagement verbinden">Bridging Technology & Civic Leadership</h1>
-                    <p class="subtitle" data-en="Tallinn Youth Council Member • Data Scientist" data-et="Tallinna Noortekogu liige • Data Scientist" data-ru="Член Молодежного совета Таллинна • Data Scientist" data-de="Mitglied des Jugendrats Tallinn • Data Scientist">Tallinn Youth Council Member • Data Scientist</p>
-                    <p data-en="I base decisions on data-driven analysis to identify opportunities, optimize processes, and continuously improve efficiency and overall performance." data-et="Ma teen otsuseid andmetel põhineva analüüsi alusel, et leida võimalusi, optimeerida protsesse ja pidevalt parandada tõhusust ja üldist tulemuslikkust." data-ru="Я принимаю решения на основе анализа данных, чтобы выявлять возможности, оптимизировать процессы и постоянно повышать эффективность и общую производительность." data-de="Ich treffe Entscheidungen auf der Grundlage datengestützter Analysen, um Chancen zu erkennen, Prozesse zu optimieren und die Effizienz kontinuierlich zu steigern.">I base decisions on data-driven analysis to identify opportunities, optimize processes, and continuously improve efficiency and overall performance.</p>
-                    <div class="social-links">
-                        <a href="https://github.com/Akomon333" class="social-btn" target="_blank"><span>GitHub</span></a>
-                        <a href="https://www.linkedin.com/in/akim-s-9a1850343/" class="social-btn" target="_blank"><span>LinkedIn</span></a>
-                        <a href="https://www.facebook.com/profile.php?id=61570973228399" class="social-btn" target="_blank"><span>Facebook</span></a>
-                        <a href="https://t.me/Jghncyncx" class="social-btn" target="_blank"><span>Telegram</span></a>
+                <div class="hero-meta">
+                    <span data-en="Tallinn Youth Council • ML Engineer" data-et="Tallinna Noortekogu • ML insener" data-ru="Молодёжный совет Таллинна • ML инженер" data-de="Jugendrat Tallinn • ML Engineer">Tallinn Youth Council • ML Engineer</span>
+                </div>
+                
+                <h1 data-en="Minimizing <span class='accent'>loss</span> between data and policy." 
+                    data-et="Minimeerin <span class='accent'>kaotust</span> andmete ja poliitika vahel." 
+                    data-ru="Минимизирую <span class='accent'>потери</span> между данными и политикой." 
+                    data-de="Minimierung des <span class='accent'>Verlusts</span> zwischen Daten und Politik.">
+                    Minimizing <span class="accent">loss</span> between data and policy.
+                </h1>
+                
+                <p class="hero-subtitle" data-en="Building production-grade ML systems with measurable civic impact. Former game dev turned data scientist. 5 years of shipping code."
+                   data-et="Ehitades tootmiskvaliteediga ML-süsteeme mõõdetava kodanikumõjuga. Endine mänguarendaja, kes sai andmeteadlaseks. 5 aastat koodi väljastamist."
+                   data-ru="Создание production-ready ML-систем с измеримым гражданским воздействием. Бывший разработчик игр, ставший data scientist. 5 лет деплоя кода."
+                   data-de="Aufbau von produktionsreifen ML-Systemen mit messbarem bürgerschaftlichem Impact. Vom Game Dev zum Data Scientist. 5 Jahre Code-Shipping.">
+                    Building production-grade ML systems with measurable civic impact. Former game dev turned data scientist. <span class="mono">5</span> years of shipping code.
+                </p>
+
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <div class="metric-value">8</div>
+                        <div class="metric-label" data-en="Projects Shipped" data-et="Väljastatud projekti" data-ru="Задеплоено проектов" data-de="Projekte Shipped">Projects Shipped</div>
+                        <div class="metric-delta">↑ 100% YoY</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">O(1)</div>
+                        <div class="metric-label" data-en="Time to Market" data-et="Aeg turule" data-ru="Время выхода на рынок" data-de="Time-to-Market">Time to Market</div>
+                        <div class="metric-delta" data-en="1 week builds" data-et="1 nädala ehitused" data-ru="Недельные билды" data-de="1-Woche-Builds">1 week builds</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">0.92</div>
+                        <div class="metric-label" data-en="F1 Score" data-et="F1 skoor" data-ru="F1 Score" data-de="F1-Score">F1 Score</div>
+                        <div class="metric-delta">avg. across models</div>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="profile-container">
-                        <img src="profilepicture.jpg" alt="Akim Stsemelinin" class="profile-img">
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="section-header">
+                <span class="section-number">§1</span>
+                <h2 data-en="Background & Constraints" data-et="Taust ja piirangud" data-ru="Бэкграунд и ограничения" data-de="Hintergrund & Bedingungen">Background & Constraints</h2>
+            </div>
+
+            <p class="lead" data-en="Started with Lua and 3D modeling in Roblox (Dec 2020). Optimized for rapid iteration and resource constraints. Currently applying these optimization patterns to machine learning pipelines and civic infrastructure."
+               data-et="Alustasin Lua ja 3D-modelleerimisega Robloxis (dets 2020). Optimeeritud kiireks iteratsiooniks ja ressursipiiranguteks. Rakendan neid optimeerimismustreid masinõppe torustikele ja kodanikuinfrastruktuurile."
+               data-ru="Начал с Lua и 3D-моделирования в Roblox (дек 2020). Оптимизировано для быстрой итерации и ограниченных ресурсов. Сейчас применяю эти паттерны оптимизации к ML-пайплайнам и гражданской инфраструктуре."
+               data-de="Gestartet mit Lua und 3D-Modellierung in Roblox (Dez 2020). Optimiert für schnelle Iteration und Ressourcenbeschränkungen. Wende diese Optimierungsmuster auf ML-Pipelines und Bürgerinfrastruktur an.">
+                Started with <strong>Lua</strong> and <strong>3D modeling</strong> in Roblox (Dec 2020). Optimized for rapid iteration and resource constraints. Currently applying these optimization patterns to machine learning pipelines and civic infrastructure.
+            </p>
+
+            <p data-en="Elected to Tallinn Youth Council in 2025. Applying data-driven decision making to municipal policy. Stack: Python, OpenCV, XGBoost, Flask. Interests: Historical optimization problems (reading), game theory (chess), and impossible problems."
+               data-et="Valiti Tallinna Noortekogusse 2025. Andmepõhise otsuste tegemise rakendamine munitsipaalpoliitikale. Stack: Python, OpenCV, XGBoost, Flask. Huvid: ajaloolised optimeerimisprobleemid (lugemine), mänguteooria (male) ja võimatud probleemid."
+               data-ru="Избран в Молодёжный совет Таллинна в 2025. Применяю data-driven подход к муниципальной политике. Стек: Python, OpenCV, XGBoost, Flask. Интересы: исторические проблемы оптимизации (чтение), теория игр (шахматы) и невозможные задачи."
+               data-de="2025 in den Jugendrat Tallinn gewählt. Anwendung datengestützter Entscheidungsfindung auf kommunale Politik. Stack: Python, OpenCV, XGBoost, Flask. Interessen: Historische Optimierungsprobleme (Lesen), Spieltheorie (Schach) und unmögliche Probleme.">
+                Elected to <strong>Tallinn Youth Council</strong> in 2025. Applying data-driven decision making to municipal policy. Stack: <span class="mono">Python, OpenCV, XGBoost, Flask</span>. Interests: Historical optimization problems (reading), game theory (chess), and impossible problems.
+            </p>
+
+            <div class="interests">
+                <div class="interest-item onclick="toggleChess()">
+                    <div class="interest-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                     </div>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">5</div>
-                            <div class="stat-label" data-en="Years of experience in IT" data-et="Aastat kogemust IT-valdkonnas" data-ru="Лет опыта в ИТ" data-de="Jahre IT-Erfahrung">Years of experience in IT</div>
+                    <div class="interest-content">
+                        <h4 data-en="Reading List" data-et="Lugemisnimekiri" data-ru="Список чтения" data-de="Leseliste">Reading List</h4>
+                        <p data-en="History & Mathematics" data-et="Ajalugu ja matemaatika" data-ru="История и математика" data-de="Geschichte & Mathematik">History & Mathematics</p>
+                    </div>
+                </div>
+                
+                <div class="interest-item" onclick="toggleChess()" style="cursor: pointer;" title="Click to reveal rating">
+                    <div class="interest-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <div class="interest-content">
+                        <h4>Lichess</h4>
+                        <p data-en="Almost daily since Mar 2026" data-et="Peaaegu iga päev alates märts 2026" data-ru="Почти ежедневно с марта 2026" data-de="Fast täglich seit Mär 2026">Almost daily since Mar 2026</p>
+                        
+                        <div class="chess-hidden" id="chess-easter">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Blitz: ~1400</span>
+                                <a href="https://lichess.org/@/Akomon777" target="_blank" style="color: var(--orange);">@Akomon777 →</a>
+                            </div>
+                            <div style="margin-top: 4px; font-size: 0.75rem; opacity: 0.7;">
+                                1. e4 e5 2. Nf3 Nc6 3. Bc4 (Italian Game)
+                            </div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-number">7</div>
-                            <div class="stat-label" data-en="Data Projects" data-et="Andmeprojektid" data-ru="Проектов данных" data-de="Datenprojekte">Data Projects</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="theorems">
+            <div class="section-header">
+                <span class="section-number">§2</span>
+                <h2 data-en="Theorems & Implementations" data-et="Teoreemid ja implementatsioonid" data-ru="Теоремы и имплементации" data-de="Theoreme & Implementierungen">Theorems & Implementations</h2>
+            </div>
+
+            <!-- Meteorite Project -->
+            <article class="theorem">
+                <div class="theorem-header">
+                    <h3 class="theorem-title" data-en="Spectral Analysis of Meteorite Composition via Computer Vision" 
+                        data-et="Meteoriidi koostise spektraalanalüüs arvutinägemise kaudu"
+                        data-ru="Спектральный анализ состава метеоритов через компьютерное зрение"
+                        data-de="Spektralanalyse der Meteoritenzusammensetzung via Computer Vision">
+                        Spectral Analysis of Meteorite Composition via Computer Vision
+                    </h3>
+                    <div class="theorem-meta">
+                        <span class="tag primary">Flask API</span>
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">XGBoost</span>
+                    </div>
+                </div>
+
+                <div class="theorem-content">
+                    <p data-en="Production API analyzing meteorite imagery to estimate mineral composition (Ni, Ir, Au), operational risk, and surface topology. Built under strict time constraints (168 hours) as a feasibility study for automated asteroid mining assessment."
+                       data-et="Tootmis-API meteoriitide piltide analüüsimiseks mineraalkoostise (Ni, Ir, Au), operatsioonilise riski ja pinnatopoloogia hindamiseks. Ehitatud range ajavahemiku jooksul (168 tundi) automatiseeritud asteroidide kaevandatavuse uuringuna."
+                       data-ru="Production API для анализа изображений метеоритов с оценкой минерального состава (Ni, Ir, Au), операционного риска и топологии поверхности. Построено под строгими временными ограничениями (168 часов) как исследование возможности автоматизированной оценки астероидной добычи."
+                       data-de="Produktions-API zur Analyse von Meteoritenbildern zur Schätzung der Mineralzusammensetzung (Ni, Ir, Au), des Betriebsrisikos und der Oberflächentopologie. Gebaut unter strengen Zeitbeschränkungen (168 Stunden) als Machbarkeitsstudie für automatisierte Asteroidenabbau-Bewertung.">
+                        <strong>Problem:</strong> Production API analyzing meteorite imagery to estimate mineral composition (Ni, Ir, Au), operational risk, and surface topology. Built under strict time constraints (<span class="mono">168 hours</span>) as a feasibility study for automated asteroid mining assessment.
+                    </p>
+
+                    <ul>
+                        <li data-en="Segmentation: Otsu's method for background removal, RGB mean extraction" 
+                            data-et="Segmenteerimine: Otsu meetod tausta eemaldamiseks, RGB keskmise ekstraheerimine"
+                            data-ru="Сегментация: метод Отсу для удаления фона, извлечение среднего RGB"
+                            data-de="Segmentierung: Otsu-Methode zur Hintergrundentfernung, RGB-Mittelwertextraktion">
+                            <strong>Segmentation:</strong> Otsu's method for background removal, RGB mean extraction
+                        </li>
+                        <li data-en="Inference: XGBoost regressor for precious metal concentrations with graceful degradation to deterministic heuristics if model unavailable"
+                            data-et="Inference: XGBoost regressor haruldaste metallide kontsentratsioonide jaoks graceful degradation'iga deterministlike heuristikateni, kui mudel pole saadaval"
+                            data-ru="Inference: XGBoost регрессор для концентраций драгоценных металлов с graceful degradation до детерминированных эвристик при недоступности модели"
+                            data-de="Inference: XGBoost-Regressor für Edelmetallkonzentrationen mit Graceful Degradation zu deterministischen Heuristiken bei Modellausfall">
+                            <strong>Inference:</strong> XGBoost regressor for precious metal concentrations with graceful degradation to deterministic heuristics if model unavailable
+                        </li>
+                        <li data-en="Topology: 128×128 displacement map via SimpleBlobDetector + Gaussian smoothing for 3D terrain generation"
+                            data-et="Topoloogia: 128×128 nihkemap SimpleBlobDetector'i + Gaussi smoothing kaudu 3D maastiku genereerimiseks"
+                            data-ru="Топология: карта смещения 128×128 через SimpleBlobDetector + Gaussian smoothing для 3D генерации террейна"
+                            data-de="Topologie: 128×128 Verschiebungskarte via SimpleBlobDetector + Gaussian Smoothing für 3D-Geländegenerierung">
+                            <strong>Topology:</strong> <span class="mono">128×128</span> displacement map via SimpleBlobDetector + Gaussian smoothing for 3D terrain generation
+                        </li>
+                    </ul>
+
+                    <div class="proof">
+                        <div class="proof-label">Output Schema</div>
+                        <div style="color: var(--text-secondary);">
+                            <span style="color: var(--orange);">composition</span>: {<br>
+                            &nbsp;&nbsp;nickel_pct: <span style="color: var(--success);">10.5</span>,<br>
+                            &nbsp;&nbsp;iridium_ppm: <span style="color: var(--success);">3.2</span>,<br>
+                            &nbsp;&nbsp;gold_ppm: <span style="color: var(--success);">0.8</span><br>
+                            },<br>
+                            <span style="color: var(--orange);">economics</span>: {<br>
+                            &nbsp;&nbsp;value_usd_per_ton: <span style="color: var(--success);">2500.0</span>,<br>
+                            &nbsp;&nbsp;mission_risk: <span style="color: var(--success);">0.45</span><br>
+                            }
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="section">
-            <div class="section-header">
-                <h2 data-en="About me" data-et="Minust" data-ru="Обо мне" data-de="Über mich">About me</h2>
-                <p data-en="My journey in IT and politics" data-et="Minu teekond IT-valdkonnas ja poliitikas" data-ru="Мой путь в сфере ИТ и политики" data-de="Mein Weg in IT und Politik">My journey in IT and politics</p>
-            </div>
-            <div class="about-content">
-                 <p
-                    data-en="My interest in technology began in December 2020, when a friend introduced me to game development on Roblox. That moment sparked years of hands-on experimentation in 3D modeling, Lua programming, and collaborative game development. Together with friends, I built projects we genuinely wanted to play or used as a way to explore new technical ideas. Over time, my focus shifted away from gaming itself toward creating work with broader real-world impact. After experimenting with C++ and app development, I found my direction in ML and Data Science. Since then, I have been working on machine learning and data-driven projects while deepening my understanding of history, economics, and the startup ecosystem through books and lectures, including works such as Zero to One. In 2025, I was elected to the Tallinn Youth Council, where I actively work on initiatives aimed at improving the quality of life for young people in Tallinn. This role allows me to combine my technical background with civic engagement, using data and technology to support better decision-making and meaningful youth-focused change."
-                    data-et="Minu huvi tehnoloogia vastu sai alguse 2020. aasta detsembris, kui sõber tutvustas mulle mänguarendust Robloxis. See äratas mitmeaastase praktilise katsetamise 3D-modelleerimise, Lua programmeerimise ja koostööpõhise mänguarenduse vallas. Koos sõpradega lõime projekte, mida ise mängida soovisime või kasutasime uute tehniliste ideede õppimiseks. Aja jooksul nihkus minu fookus mängimiselt tööle, millel oleks laiem mõju päriselus. Pärast C++ ja rakenduste arenduse proovimist leidsin oma suuna ML-is ja Data Science’is. Sellest ajast alates olen tegelenud masinõppe ja andmepõhiste projektidega ning süvendanud oma arusaama ajaloost, majandusest ja startup-ökosüsteemist raamatute ja loengute kaudu, sealhulgas teoste nagu Zero to One abil. 2025. aastal valiti mind Tallinna Noortekogu liikmeks, kus tegelen aktiivselt algatustega, mille eesmärk on parandada noorte elukvaliteeti Tallinnas. See roll võimaldab mul ühendada oma tehnilise tausta kodanikuosalusega ning kasutada andmeid ja tehnoloogiat paremate otsuste ja noortele suunatud sisuliste muutuste toetamiseks."
-                    data-ru="Мой интерес к технологиям начался в декабре 2020 года, когда друг познакомил меня с разработкой игр на Roblox. Это стало отправной точкой для нескольких лет практического опыта в 3D-моделировании, программировании на Lua и командной разработке игр. Вместе с друзьями мы создавали проекты, в которые сами хотели играть, или использовали их как способ изучать новые технические идеи. Со временем мой фокус сместился от самих игр к работе с более широким реальным воздействием. После экспериментов с C++ и разработкой приложений я нашёл своё направление в ML и Data Science. С тех пор я занимаюсь проектами в области машинного обучения и анализа данных, параллельно углубляя понимание истории, экономики и стартап-экосистемы через книги и лекции, включая такие работы, как Zero to One. В 2025 году я был избран в Молодёжный совет Таллинна, где активно работаю над инициативами, направленными на улучшение качества жизни молодёжи в Таллинне. Эта роль позволяет мне объединять технический бэкграунд с гражданской деятельностью, используя данные и технологии для более качественных решений и значимых изменений для молодёжи."
-                    data-de="Mein Interesse an Technologie begann im Dezember 2020 durch die Spieleentwicklung auf Roblox. Dies löste jahrelange praktische Experimente in 3D-Modellierung, Lua-Programmierung und kollaborativer Entwicklung aus. Mit der Zeit verlagerte sich mein Fokus auf Projekte mit größerer realer Wirkung. Über C++ und App-Entwicklung fand ich meine Richtung in ML und Data Science. Parallel dazu vertiefe ich mein Verständnis für Geschichte, Wirtschaft und das Startup-Ökosystem (z. B. 'Zero to One'). Seit 2025 bin ich Mitglied des Jugendrats von Tallinn. Diese Rolle erlaubt es mir, meinen technischen Hintergrund mit bürgerschaftlichem Engagement zu verbinden und Daten sowie Technologie für bessere Entscheidungsfindungen und sinnvolle Veränderungen für die Jugend einzusetzen.">
-                    My interest in technology began in December 2020, when a friend introduced me to game development on Roblox. That moment sparked years of hands-on experimentation in 3D modeling, Lua programming, and collaborative game development. Together with friends, I built projects we genuinely wanted to play or used as a way to explore new technical ideas. Over time, my focus shifted away from gaming itself toward creating work with broader real-world impact. After experimenting with C++ and app development, I found my direction in ML and Data Science. Since then, I have been working on machine learning and data-driven projects while deepening my understanding of history, economics, and the startup ecosystem through books and lectures, including works such as Zero to One. In 2025, I was elected to the Tallinn Youth Council, where I actively work on initiatives aimed at improving the quality of life for young people in Tallinn. This role allows me to combine my technical background with civic engagement, using data and technology to support better decision-making and meaningful youth-focused change.
-              </p>
-              </div>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <h2 data-en="Expertise" data-et="Ekspertiis" data-ru="Экспертиза" data-de="Expertise">Expertise</h2>
-                <p data-en="Core competencies across technology and civic engagement" data-et="Põhioskused tehnoloogia ja kodanikuosaluse valdkonnas" data-ru="Основные компетенции в области технологий и гражданской активности" data-de="Kernkompetenzen in Technologie und bürgerschaftlichem Engagement">Core competencies across technology and civic engagement</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-tag"><span data-en="Machine Learning" data-et="Masinõpe" data-ru="Машинное обучение" data-de="Maschinelles Lernen">Machine Learning</span></div>
-                <div class="skill-tag"><span>Python</span></div>
-                <div class="skill-tag"><span data-en="Data Visualization" data-et="Andmete visualiseerimine" data-ru="Визуализация данных" data-de="Datenvisualisierung">Data Visualization</span></div>
-                <div class="skill-tag"><span data-en="Statistical Modeling" data-et="Statistiline modelleerimine" data-ru="Статистическое моделирование" data-de="Statistische Modellierung">Statistical Modeling</span></div>
-                <div class="skill-tag"><span data-en="Youth Advocacy" data-et="Noorte esindamine" data-ru="Защита молодежи" data-de="Jugendvertretung">Youth Advocacy</span></div>
-                <div class="skill-tag"><span>SQL & Databases</span></div>
-                <div class="skill-tag"><span data-en="Public Speaking" data-et="Avalik esinemine" data-ru="Публичные выступления" data-de="Rhetorik">Public Speaking</span></div>
-                <div class="skill-tag"><span data-en="Deep Learning" data-et="Süvaõpe" data-ru="Гuluбокое обучение" data-de="Deep Learning">Deep Learning</span></div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <h2 data-en="Featured Projects" data-et="Esitletud projektid" data-ru="Избранные проекты" data-de="Ausgewählte Projekte">Featured Projects</h2>
-                <p data-en="Impactful work at the intersection of data and policy" data-et="Mõjukas töö andmete ja poliitika ristumiskohas" data-ru="Значимая работа на стыке данных и политики" data-de="Wirkungsvolle Arbeit an der Schnittstelle von Daten und Politik">Impactful work at the intersection of data and policy</p>
-            </div>
-            <div class="project-grid">
-<div class="project-card">
-    <div class="project-header">
-        <div class="project-number">01</div>
-        <div class="project-icon">🗳️</div>
-        <h3 data-en="Voter Group Targeting via Reinforcement Learning" 
-            data-et="Valijarühmade sihtimine RL abil" 
-            data-ru="Таргетинг избирателей через RL" 
-            data-de="Wählergruppen-Targeting via Reinforcement Learning">
-            Voter Group Targeting via Reinforcement Learning
-        </h3>
-        <div class="project-tags">
-            <div class="project-tag"><span data-en="Political Analytics" data-et="Poliitiline analüütika" data-ru="Политическая аналитика" data-de="Politische Analytik">Political Analytics</span></div>
-            <div class="project-tag"><span>Reinforcement Learning</span></div>
-            <div class="project-tag"><span>Python</span></div>
-        </div>
-    </div>
-
-    <div class="project-body">
-        <p data-en="Designed a Reinforcement Learning system with a single decision function that selects one voter group to campaign for at each step. Increasing support in the targeted group simultaneously decreases popularity in other groups, forcing the agent to learn optimal trade-offs. The model was trained on synthetic data inspired by the 2023 Estonian parliamentary elections."
-           data-et="Loodud Reinforcement Learning põhine süsteem ühe otsustusfunktsiooniga, mis valib igal sammul ühe valijarühma, kellele kampaaniat teha. Sihtgrupi toetuse kasv vähendab samaaegselt populaarsust teistes rühmades, sundides mudelit õppima optimaalseid kompromisse. Mudel treeniti sünteetilistel andmetel, mis on inspireeritud 2023. aasta Eesti Riigikogu valimistest."
-           data-ru="Разработана система на основе RL с одной функцией принятия решений, выбирающей одну группу избирателей для кампании на каждом шаге. Рост поддержки в целевой группе одновременно снижает популярность в других группах, заставляя модель изучать оптимальные компромиссы. Обучение проводилось на синтетических данных, вдохновленных выборами в Эстонии 2023 года."
-           data-de="Entwicklung eines Reinforcement Learning Systems, das bei jedem Schritt eine Wählergruppe für eine Kampagne auswählt. Da die Unterstützung in der Zielgruppe die Popularität in anderen Gruppen senkt, lernt der Agent optimale Kompromisse. Trainiert auf synthetischen Daten, inspiriert von den estnischen Parlamentswahlen 2023.">
-           Designed a Reinforcement Learning system with a single decision function that selects one voter group to campaign for at each step. Increasing support in the targeted group simultaneously decreases popularity in other groups, forcing the agent to learn optimal trade-offs. The model was trained on synthetic data inspired by the 2023 Estonian parliamentary elections.
-        </p>
-        
-        <div class="project-link-container" style="margin-top: 15px;">
-            <a href="https://github.com/Akomon333/Election-majority-votes-simulation" target="_blank" class="project-link" 
-               data-en="🔗 Link to GitHub" 
-               data-et="🔗 Lingid GitHubile" 
-               data-ru="🔗 Ссылка на GitHub" 
-               data-de="🔗 Link zur GitHub">
-               🔗 Link to GitHub
-            </a>
-        </div>
-    </div>
-
-    <div class="project-footer">
-        <div class="project-meta">
-            <span class="project-meta-item">⏱ 2025</span>
-            <span class="project-meta-item" 
-                  data-en="🏆 Simulation Project" 
-                  data-et="🏆 Simulatsiooniprojekt" 
-                  data-ru="🏆 Симуляционный проект" 
-                  data-de="🏆 Simulationsprojekt">
-                  🏆 Simulation Project
-            </span>
-        </div>
-    </div>
-</div>
-
-<div class="project-card">
-    <div class="project-header">
-        <div class="project-number">02</div>
-        <div class="project-icon">👨‍💻</div>
-        <h3 data-en="Fantasy: Find the Best Spot to Campaign in Lasnamäe" 
-            data-et="Fantaasia: Leia parim koht kampaaniaks Lasnamäel" 
-            data-ru="Фантазия: Найди лучшее место для кампании в Ласнамяэ" 
-            data-de="Fantasie: Finde den besten Ort für den Wahlkampf in Lasnamäe">
-            Fantasy: Find the Best Spot to Campaign in Lasnamäe
-        </h3>
-        <div class="project-tags">
-            <div class="project-tag"><span data-en="Political Analytics" data-et="Poliitiline analüütika" data-ru="Политическая аналитика" data-de="Politische Analytik">Political Analytics</span></div>
-            <div class="project-tag"><span>Neural Network</span></div>
-            <div class="project-tag"><span>Python</span></div>
-        </div>
-    </div>
-
-    <div class="project-body">
-        <p data-en="I developed an algorithm that identifies the best campaign locations by matching user profiles with district demographics. It features a neural network trained on Estonian election data to predict support levels. While it uses real Estonian party names, the district data is purely fictional or generated by AI for simulation purposes. Please enjoy it as a creative project and do not take the results seriously."
-           data-et="Arendasin algoritmi, mis leiab parimad kampaaniapaigad, võrreldes kasutaja profiili linnaosa demograafiaga. Süsteem kasutab Eesti valimistulemustel treenitud närvivõrku toetuse prognoosimiseks. Kuigi kasutatakse Eesti erakondade nimesid, on muud andmed väljamõeldud või tehisintellekti loodud simulatsioon. Palun võtke seda kui loovprojekti mitte tõtt."
-           data-ru="Я разработал алгоритм, который находит лучшие места для кампании, сравнивая профиль пользователя с данными района. Система использует нейросеть, обученную на результатах выборов в Эстонии. Хотя в проекте используются названия реальных партий, данные районов являются вымышленными или созданными ИИ. Пожалуйста, воспринимайте это как творческий проект, а не серьезное исследование."
-           data-de="Ich habe einen Algorithmus entwickelt, der die besten Wahlkampfstandorte ermittelt, indem er Nutzerprofile mit Bezirksdaten abgleicht. Ein auf estnischen Wahldaten trainiertes neuronales Netz berechnet die potenzielle Unterstützung. Obwohl echte estnische Parteinamen verwendet werden, sind die Bezirksdaten fiktiv oder KI-generiert. Bitte betrachten Sie dies als kreatives Projekt und nicht als reale Analyse.">
-           I developed an algorithm that identifies the best campaign locations by matching user profiles with district demographics. It features a neural network trained on Estonian election data to predict support levels. While it uses real Estonian party names, the district data is purely fictional or generated by AI for simulation purposes. Please enjoy it as a creative project and do not take the results seriously.
-        </p>
-        
-        <div class="project-link-container" style="margin-top: 15px;">
-            <a href="https://akomon333.github.io/Fantasy-Lasna-Campaign-Predictor" target="_blank" class="project-link" 
-               data-en="🔗 Link to the website" 
-               data-et="🔗 Lingid veebilehele" 
-               data-ru="🔗 Ссылка на сайт" 
-               data-de="🔗 Link zur Website">
-               🔗 Link to the website
-            </a>
-        </div>
-    </div>
-
-    <div class="project-footer">
-        <div class="project-meta">
-            <span class="project-meta-item">⏱ 2025</span>
-            <span class="project-meta-item" 
-                  data-en="🔮 Fantasy Campaign Simulation" 
-                  data-et="🔮 Fantaasia-kampaaniasimulatsioon" 
-                  data-ru="🔮 Фантазийная симуляция кампании" 
-                  data-de="🔮 Fantasie-Kampagnensimulation">
-                  🔮 Fantasy Campaign Simulation
-            </span>
-        </div>
-    </div>
-</div>
-        </div>
-              <div class="project-card">
-                <div class="project-header">
-                    <div class="project-number">03</div>
-                    <div class="project-icon">🌆</div>
-                    <h3 data-en="Youth as District Development, Lasnamäe" data-et="Noored kui linnaosa areng, Lasnamäe" data-ru="Молодёжь как развитие района, Ласнамяэ" data-de="Jugend als Stadtteilentwicklung, Lasnamäe">Youth as District Development, Lasnamäe</h3>
-                    <div class="project-tags">
-                        <div class="project-tag"><span data-en="Community Development" data-et="Kogukonna areng" data-ru="Развитие сообщества" data-de="Stadtteilentwicklung">Community Development</span></div>
-                        <div class="project-tag"><span data-en="Communication" data-et="Kommunikatsioon" data-ru="Коммуникация" data-de="Kommunikation">Communication</span></div>
+                <div class="theorem-footer">
+                    <span class="complexity">Time: O(n log n) | Space: O(n²)</span>
+                    <div class="theorem-links">
+                        <a href="https://github.com/Akomon333" class="theorem-link" target="_blank">
+                            <span>Implementation</span>
+                            <span style="font-family: 'JetBrains Mono';">→</span>
+                        </a>
                     </div>
                 </div>
-                <div class="project-body">
-                    <p data-en="I am involved in the Youth as District Development program in Lasnamäe, where we engage young people in shaping the future of our district. We organize events like school visits to gather feedback, workshops, and participatory cafés. We use this feedback to help the District create better opportunities and activities for youth. This project gives me valuable experience in leadership and event organization."
-                       data-et="Osalen programmis Noored kui linnaosa areng Lasnamäel, kus kaasame noori linnaosa tuleviku kujundamisse. Korraldame koolikülastusi, töötubasid ja osaluskohvikuid, et koguda tagasisidet ja luua paremaid võimalusi noortele. See projekt annab mulle väärtuslikke kogemusi juhtimises ja korraldamises."
-                       data-ru="Я участвую в программе развития района Ласнамяэ, вовлекая молодежь в формирование будущего района. Мы организуем посещения школ, воркшопы и дискуссионные кафе, чтобы собрать отзывы и создать лучшие возможности для молодежи. Этот проект дает мне ценный опыт в лидерстве и организации мероприятий."
-                       data-de="Ich engagiere mich im Programm 'Jugend als Stadtteilentwicklung' in Lasnamäe. Wir binden junge Menschen in die Zukunftsgestaltung des Bezirks ein, organisieren Schulbesuche zur Feedback-Gewinnung sowie Workshops und Partizipations-Cafés. Ziel ist es, bessere Möglichkeiten für Jugendliche zu schaffen. Das Projekt bietet mir wertvolle Erfahrungen in Führung und Organisation.">
-                        I am involved in the Youth as District Development program in Lasnamäe, where we engage young people in shaping the future of our district. We organize events like school visits to gather feedback, workshops, and participatory cafés. We use this feedback to help the District create better opportunities and activities for youth. This project gives me valuable experience in leadership and event organization.
+            </article>
+
+            <!-- RL Project -->
+            <article class="theorem">
+                <div class="theorem-header">
+                    <h3 class="theorem-title" data-en="Multi-Armed Bandit Approach to Voter Targeting" 
+                        data-et="Mitme käega bandiidi lähenemine valijate sihtimisele"
+                        data-ru="Подход многорукого бандита к таргетингу избирателей"
+                        data-de="Multi-Armed-Bandit-Ansatz zum Wähler-Targeting">
+                        Multi-Armed Bandit Approach to Voter Targeting
+                    </h3>
+                    <div class="theorem-meta">
+                        <span class="tag primary">Reinforcement Learning</span>
+                        <span class="tag">Q-Learning</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="theorem-content">
+                    <p data-en="Formulated voter outreach as a reinforcement learning problem where actions represent demographic targeting and rewards reflect polling deltas. Agent learns optimal policy π* under constraints of limited campaign budget and cross-demographic influence leakage."
+                       data-et="Formuleerisin valijate kättesaamise tugevdusõppe probleemina, kus tegevused esindavad demograafilist sihtimist ja preemiad kajastavad küsitluste deltasid. Agent õpib optimaalset poliitikat π* piiratud kampaania eelarve ja cross-demograafilise mõju lekkimise piirangute all."
+                       data-ru="Сформулировал аутрич избирателей как задачу обучения с подкреплением, где действия представляют демографический таргетинг, а награды отражают дельты опросов. Агент учит оптимальную политику π* при ограничениях бюджета кампании и утечки влияния между демографиями."
+                       data-de="Formulierte Wähler-Outreach als Reinforcement-Learning-Problem, bei dem Aktionen demografisches Targeting darstellen und Belohnungen Umfrage-Deltas widerspiegeln. Agent lernt optimale Politik π* unter Budgetbeschränkungen und cross-demografischem Einfluss-Leakage.">
+                        Formulated voter outreach as a reinforcement learning problem where actions represent demographic targeting and rewards reflect polling deltas. Agent learns optimal policy <span class="math">π*</span> under constraints of limited campaign budget and cross-demographic influence leakage.
                     </p>
                 </div>
-                <div class="project-footer">
-                    <div class="project-meta">
-                        <span class="project-meta-item">⏱ 2025</span>
-                        <span class="project-meta-item" data-en="🏆 Erasmus+ Project" data-et="🏆 Erasmus+ projekt" data-ru="🏆 Проект Erasmus+" data-de="🏆 Erasmus+ Projekt">🏆 Erasmus+ Project</span>
+
+                <div class="theorem-footer">
+                    <span class="complexity">Regret: O(√T)</span>
+                    <div class="theorem-links">
+                        <a href="https://github.com/Akomon333/Election-majority-votes-simulation" class="theorem-link" target="_blank">
+                            <span>Source</span>
+                            <span style="font-family: 'JetBrains Mono';">→</span>
+                        </a>
                     </div>
                 </div>
+            </article>
+
+            <!-- Lasnamäe Project -->
+            <article class="theorem">
+                <div class="theorem-header">
+                    <h3 class="theorem-title" data-en="Geospatial Inference of Campaign Efficacy" 
+                        data-et="Kampaania tõhususe georuumiline järeldamine"
+                        data-ru="Географическое предсказание эффективности кампании"
+                        data-de="Geografische Inferenz der Kampagneneffizienz">
+                        Geospatial Inference of Campaign Efficacy
+                    </h3>
+                    <div class="theorem-meta">
+                        <span class="tag primary">Neural Network</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Simulation</span>
+                    </div>
+                </div>
+
+                <div class="theorem-content">
+                    <p data-en="Web-based inference engine matching user profiles to district-level demographics using a neural network trained on Estonian electoral data. Includes synthetic data generation for educational scenarios."
+                       data-et="Veebipõhine järeldusmootor, mis sobitab kasutajaprofiilid linnaosa demograafiaga, kasutades Eesti valimisandmetel treenitud närvivõrku. Sisaldab sünteetilist andmete genereerimist haridusstsenaariumide jaoks."
+                       data-ru="Веб-движок инференса, сопоставляющий профили пользователей с демографией района через нейросеть, обученную на эстонских избирательных данных. Включает генерацию синтетических данных для учебных сценариев."
+                       data-de="Web-basierte Inferenz-Engine, die Nutzerprofile mit Bezirksdemografie abgleicht mittels eines auf estnischen Wahldaten trainierten neuronalen Netzes. Umfasst synthetische Datengenerierung für Bildungsszenarien.">
+                        Web-based inference engine matching user profiles to district-level demographics using a neural network trained on Estonian electoral data. Includes synthetic data generation for educational scenarios.
+                    </p>
+                </div>
+
+                <div class="theorem-footer">
+                    <span class="complexity">Latency: ~50ms</span>
+                    <div class="theorem-links">
+                        <a href="https://akomon333.github.io/Fantasy-Lasna-Campaign-Predictor" class="theorem-link" target="_blank">
+                            <span>Demo</span>
+                            <span style="font-family: 'JetBrains Mono';">→</span>
+                        </a>
+                        <a href="https://github.com/Akomon333/Fantasy-Lasna-Campaign-Predictor" class="theorem-link" target="_blank">
+                            <span>Code</span>
+                            <span style="font-family: 'JetBrains Mono';">→</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Civic Project -->
+            <article class="theorem" style="border-left: 3px solid var(--orange);">
+                <div class="theorem-header">
+                    <h3 class="theorem-title" data-en="Youth Participation as Optimization Problem" 
+                        data-et="Noorte osalus optimeerimisprobleemina"
+                        data-ru="Участие молодёжи как задача оптимизации"
+                        data-de="Jugendbeteiligung als Optimierungsproblem">
+                        Youth Participation as Optimization Problem
+                    </h3>
+                    <div class="theorem-meta">
+                        <span class="tag">Erasmus+</span>
+                        <span class="tag">Policy</span>
+                        <span class="tag" data-en="In Progress" data-et="Käimas" data-ru="В процессе" data-de="Laufend">In Progress</span>
+                    </div>
+                </div>
+
+                <div class="theorem-content">
+                    <p data-en="Lasnamäe District, Tallinn. Maximizing youth engagement via participatory budgeting and feedback loops. Constraint: Limited municipal resources. Objective function: Quality of life metrics for ages 14-26."
+                       data-et="Lasnamäe linnaosa, Tallinn. Noorte kaasatuse maksimeerimine osaluseelarvete ja tagasiside tsüklite kaudu. Piirang: piiratud munitsipaalressursid. Eesmärk: elukvaliteedi mõõdikud vanuses 14-26."
+                       data-ru="Район Ласнамяэ, Таллин. Максимизация вовлечённости молодёжи через участвительное бюджетирование и петли обратной связи. Ограничение: ограниченные муниципальные ресурсы. Целевая функция: метрики качества жизни для 14-26 лет."
+                       data-de="Bezirk Lasnamäe, Tallinn. Maximierung der Jugendbeteiligung via partizipativem Budgeting und Feedback-Loops. Bedingung: Begrenzte kommunale Ressourcen. Zielfunktion: Lebensqualitätsmetriken für 14-26-Jährige.">
+                        <strong>Lasnamäe District, Tallinn.</strong> Maximizing youth engagement via participatory budgeting and feedback loops. <strong>Constraint:</strong> Limited municipal resources. <strong>Objective function:</strong> Quality of life metrics for ages 14-26.
+                    </p>
+                </div>
+
+                <div class="theorem-footer">
+                    <span class="complexity">Since 2025</span>
+                </div>
+            </article>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <span class="section-number">§3</span>
+                <h2 data-en="Skill Space" data-et="Oskuste ruum" data-ru="Пространство навыков" data-de="Kompetenzraum">Skill Space</h2>
             </div>
-          </div>
+
+            <div class="skills-set">
+                <span class="set-name">S</span> = {<span class="element">Python</span>, <span class="element">OpenCV</span>, <span class="element">XGBoost</span>, <span class="element">Flask</span>, <span class="element">SQL</span>, <span class="element">Pandas</span>, <span class="element">NumPy</span>, <span class="element">Scikit-learn</span>, <span class="element">Git</span>, <span class="element">Linux</span>}<br>
+                <span style="margin-top: 12px; display: block; font-size: 0.9rem;">
+                    <span class="set-name">D</span> = {<span class="element" data-en="Computer Vision" data-et="Arvutinägemine" data-ru="Компьютерное зрение" data-de="Computer Vision">Computer Vision</span>, <span class="element" data-en="Predictive Modeling" data-et="Ennustav modelleerimine" data-ru="Предиктивное моделирование" data-de="Prädiktive Modellierung">Predictive Modeling</span>, <span class="element" data-en="Public Policy" data-et="Avalik poliitika" data-ru="Государственная политика" data-de="Öffentliche Politik">Public Policy</span>} ⊂ <span class="set-name">S</span>
+                </span>
+            </div>
         </section>
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3 data-en="Let's Connect" data-et="Võtame ühendust" data-ru="Давайте свяжемся" data-de="Lass uns vernetzen">Let's Connect</h3>
-                    <p data-en="Open to collaboration opportunities, speaking engagements, and consulting projects that bridge technology and public service." data-et="Avatud koostöövõimalustele, esinemistele ja konsulteerimisprojektidele, mis ühendavad tehnoloogiat ja avalikku teenistust." data-ru="Открыт для возможностей сотрудничества и консалтинговых проектов, объединяющих технологии и общественную службу." data-de="Offen für Kooperationen, Vorträge und Beratungsprojekte, die Technologie und öffentlichen Dienst verbinden.">Open to collaboration opportunities, speaking engagements, and consulting projects that bridge technology and public service.</p>
-                </div>
-                <div class="footer-links">
-                    <h4 data-en="Quick Links" data-et="Kiirlingid" data-ru="Быстрые ссылки" data-de="Quick Links">Quick Links</h4>
-                    <a href="https://github.com/Akomon333" target="_blank">GitHub</a>
-                    <a href="https://www.facebook.com/profile.php?id=61570973228399" target="_blank">Facebook</a>
-                    <a href="https://t.me/Jghncyncx" target="_blank">Telegram</a>
-                </div>
-                <div class="footer-links">
-                    <h4 data-en="Contact" data-et="Kontakt" data-ru="Контакт" data-de="Kontakt">Contact</h4>
-                    <a>Gmail: akomon10@gmail.com</a>
-                    <a href="https://www.linkedin.com/in/akim-s-9a1850343/" data-en="LinkedIn" data-et="LinkedIn" data-ru="LinkedIn" data-de="LinkedIn">LinkedIn</a>
-                </div>
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4 data-en="Contact" data-et="Kontakt" data-ru="Контакт" data-de="Kontakt">Contact</h4>
+                <p>akomon10@gmail.com</p>
+                <p style="margin-top: 8px; font-size: 0.85rem; opacity: 0.7;">Tallinn, Estonia (UTC+2)</p>
             </div>
-            <div class="footer-bottom">
-                <p data-en="© 2025 • Tallinn, Estonia" data-et="© 2025 • Tallinn, Eesti" data-ru="© 2025 • Таллинн, Эстония" data-de="© 2025 • Tallinn, Estland">© 2025 • Tallinn, Estonia</p>
+            
+            <div class="footer-col">
+                <h4>Links</h4>
+                <a href="https://github.com/Akomon333" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/akim-s-9a1850343/" target="_blank">LinkedIn</a>
+                <a href="https://t.me/Jghncyncx" target="_blank">Telegram</a>
             </div>
+            
+            <div class="footer-col">
+                <h4 data-en="Game" data-et="Mäng" data-ru="Игра" data-de="Spiel">Game</h4>
+                <a href="https://lichess.org/@/Akomon777" target="_blank">Lichess</a>
+                <span style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 8px; display: block;">
+                    1.e4 e5 2.Nf3 Nc6 3.Bc4
+                </span>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>λ = <span id="lambda-val">0.000000</span> | <span data-en="Built with constraints" data-et="Ehitatud piirangutega" data-ru="Построено с ограничениями" data-de="Mit Bedingungen gebaut">Built with constraints</span> | © 2026</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Language switching
+        let currentLang = localStorage.getItem('lang') || 'en';
+        
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            });
+            
+            document.querySelectorAll(`[data-${lang}]`).forEach(el => {
+                const content = el.getAttribute(`data-${lang}`);
+                if (content) {
+                    // Check if it contains HTML
+                    if (content.includes('<')) {
+                        el.innerHTML = content;
+                    } else {
+                        el.textContent = content;
+                    }
+                }
+            });
+        }
+
+        // Chess easter egg
+        function toggleChess() {
+            const egg = document.getElementById('chess-easter');
+            egg.classList.toggle('active');
+        }
+
+        // Terminal mode (click logo 3 times)
+        let logoClicks = 0;
+        let lastClick = 0;
+        
+        function toggleTerminal(e) {
+            e.preventDefault();
+            const now = Date.now();
+            if (now - lastClick > 1000) logoClicks = 0;
+            logoClicks++;
+            lastClick = now;
+            
+            if (logoClicks >= 3) {
+                document.body.classList.toggle('terminal-mode');
+                logoClicks = 0;
+                // Flash the indicator
+                document.getElementById('konami').classList.add('active');
+                setTimeout(() => {
+                    document.getElementById('konami').classList.remove('active');
+                }, 1000);
+            }
+        }
+
+        // Konami code easter egg
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                document.getElementById('konami').style.opacity = konamiIndex / 10;
+                if (konamiIndex === konamiCode.length) {
+                    alert('CV Download: https://github.com/Akomon333/cv.pdf');
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+                document.getElementById('konami').style.opacity = 0.2;
+            }
+        });
+
+        // Lambda value animation (easter egg: counts up to phi)
+        let lambda = 0;
+        const target = 1.61803398875; // Golden ratio
+        const lambdaEl = document.getElementById('lambda-val');
+        
+        setInterval(() => {
+            if (lambda < target) {
+                lambda += 0.000001;
+                lambdaEl.textContent = lambda.toFixed(6);
+            }
+        }, 50);
+
+        // Initialize
+        setLang(currentLang);
+    </script>
 </body>
 </html>
