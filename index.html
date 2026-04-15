@@ -3,56 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akim Kern — Founder & Civic Technologist</title>
+    <title>Akim Kern — Systems Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Aristocratic Dark Palette */
-            --bg-primary: #0a0a0b;
-            --bg-secondary: #111113;
-            --bg-tertiary: #161619;
-            --surface: #1a1a1d;
-            --surface-hover: #222226;
-            
-            /* Noble Accents */
-            --gold: #c9a962;
-            --gold-light: #e8d5a3;
-            --gold-dark: #9a7b3d;
-            --cream: #f5f0e6;
-            --cream-muted: #a8a095;
-            --stone: #6b6560;
-            
-            /* Technical accents */
-            --accent: #8b7355;
-            --accent-subtle: rgba(201, 169, 98, 0.1);
-            --border: rgba(201, 169, 98, 0.15);
-            --border-strong: rgba(201, 169, 98, 0.3);
-            
-            /* Typography */
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Inter', -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            
-            /* Spacing */
-            --section-gap: 160px;
-            --content-gap: 80px;
+            /* Swiss Style with Dark Blue */
+            --bg: #fafafa;
+            --fg: #0a1628;
+            --blue: #003366;
+            --blue-light: #004080;
+            --blue-dark: #001a33;
+            --muted: #5a6a7a;
+            --light: #e8ecef;
+            --grid: rgba(0, 51, 102, 0.04);
         }
 
-        @media (prefers-color-scheme: light) {
+        @media (prefers-color-scheme: dark) {
             :root {
-                --bg-primary: #faf9f7;
-                --bg-secondary: #f5f3f0;
-                --bg-tertiary: #ebe8e3;
-                --surface: #ffffff;
-                --surface-hover: #f0ede8;
-                --cream: #1a1917;
-                --cream-muted: #5c5852;
-                --gold: #8b6914;
-                --gold-light: #a67c00;
-                --border: rgba(139, 105, 20, 0.15);
-                --border-strong: rgba(139, 105, 20, 0.3);
+                --bg: #0a1628;
+                --fg: #f0f4f8;
+                --blue: #4a90e2;
+                --blue-light: #6ba3e0;
+                --blue-dark: #2c5282;
+                --muted: #8a9aaa;
+                --light: #1a2a3a;
+                --grid: rgba(74, 144, 226, 0.06);
             }
         }
 
@@ -63,1359 +40,741 @@
         }
 
         html {
-            scroll-behavior: smooth;
-            font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        body {
-            font-family: var(--font-serif);
-            background: var(--bg-primary);
-            color: var(--cream);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 15px;
             line-height: 1.6;
-            font-size: 17px;
-            font-weight: 400;
-            letter-spacing: 0.01em;
-            overflow-x: hidden;
+            color: var(--fg);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Grain texture overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: 9999;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-        }
-
-        /* Selection */
-        ::selection {
-            background: var(--gold);
-            color: var(--bg-primary);
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-strong);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gold);
-        }
-
-        /* Header - Floating glass effect */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: rgba(10, 10, 11, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 6%;
-            transition: all 0.4s ease;
-        }
-
-        @media (prefers-color-scheme: light) {
-            header {
-                background: rgba(250, 249, 247, 0.85);
-            }
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            text-decoration: none;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .logo-seal {
-            width: 44px;
-            height: 44px;
-            border: 1.5px solid var(--gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: all 0.4s ease;
-        }
-
-        .logo-seal::before {
-            content: '';
-            position: absolute;
-            inset: 4px;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            opacity: 0.5;
-        }
-
-        .logo-seal span {
-            font-family: var(--font-serif);
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: var(--gold);
-            font-style: italic;
-        }
-
-        .logo:hover .logo-seal {
-            transform: rotate(180deg);
-            border-color: var(--gold-light);
-        }
-
-        .logo-text {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--cream);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            gap: 48px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
-            color: var(--cream-muted);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            position: relative;
-            padding: 8px 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .lang-switcher {
-            display: flex;
-            gap: 2px;
-            padding-left: 32px;
-            border-left: 1px solid var(--border);
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--cream-muted);
-            cursor: pointer;
-            padding: 6px 10px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            letter-spacing: 0.1em;
-        }
-
-        .lang-btn:hover {
-            color: var(--gold);
-            background: var(--accent-subtle);
-        }
-
-        .lang-btn.active {
-            color: var(--gold);
-            font-weight: 600;
-            background: var(--accent-subtle);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 180px 6% 120px;
-        }
-
-        /* Hero Section - Editorial Layout */
-        .hero {
-            margin-bottom: var(--section-gap);
-            position: relative;
+        /* Swiss Grid System */
+        body {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-eyebrow {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--gold);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .hero-eyebrow::before {
-            content: '';
-            display: inline-block;
-            width: 32px;
-            height: 1px;
-            background: var(--gold);
-        }
-
-        h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 300;
-            line-height: 1.1;
-            margin-bottom: 32px;
-            color: var(--cream);
-            letter-spacing: -0.02em;
-        }
-
-        h1 .accent {
-            color: var(--gold);
-            font-style: italic;
-            position: relative;
-        }
-
-        h1 .accent::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--gold);
-            opacity: 0.5;
-        }
-
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--cream-muted);
-            line-height: 1.7;
-            margin-bottom: 48px;
-            font-weight: 400;
-            max-width: 480px;
-        }
-
-        .hero-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--stone);
-            border-left: 2px solid var(--border);
-            padding-left: 24px;
-        }
-
-        .hero-visual {
-            position: relative;
-            height: 100%;
-            min-height: 400px;
-        }
-
-        .hero-visual::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            width: 200px;
-            height: 200px;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            opacity: 0.5;
-        }
-
-        .hero-visual::after {
-            content: '∫';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 280px;
-            color: var(--gold);
-            opacity: 0.03;
-            font-family: var(--font-serif);
-            font-style: italic;
-            pointer-events: none;
-        }
-
-        /* Metrics - Elegant cards */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-top: 64px;
-            padding-top: 48px;
-            border-top: 1px solid var(--border);
-        }
-
-        .metric {
-            position: relative;
-            padding: 24px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            transition: all 0.4s ease;
-        }
-
-        .metric:hover {
-            border-color: var(--gold);
-            background: var(--surface-hover);
-            transform: translateY(-4px);
-        }
-
-        .metric-value {
-            font-family: var(--font-serif);
-            font-size: 2.8rem;
-            font-weight: 300;
-            color: var(--gold);
-            line-height: 1;
-            margin-bottom: 12px;
-        }
-
-        .metric-label {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            color: var(--cream-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 8px;
-        }
-
-        .metric-delta {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--accent);
-        }
-
-        /* Section styling */
-        section {
-            margin-bottom: var(--section-gap);
-            position: relative;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: baseline;
+            grid-template-columns: repeat(12, 1fr);
             gap: 24px;
-            margin-bottom: 48px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--border);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 24px;
         }
 
-        .section-number {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--gold);
-            font-weight: 400;
-            letter-spacing: 0.1em;
-        }
-
-        h2 {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: var(--cream);
-            letter-spacing: -0.01em;
-        }
-
-        .section-subtitle {
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            color: var(--cream-muted);
-            margin-left: auto;
-            letter-spacing: 0.05em;
-        }
-
-        /* Text content */
-        .lead {
-            font-size: 1.25rem;
-            color: var(--cream-muted);
-            margin-bottom: 32px;
-            line-height: 1.7;
-            font-weight: 300;
-        }
-
-        p {
-            margin-bottom: 1.4em;
-            line-height: 1.8;
-            color: var(--cream-muted);
-        }
-
-        strong {
-            color: var(--cream);
-            font-weight: 500;
-        }
-
-        /* Project Cards - Editorial style */
-        .project {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 48px;
-            margin-bottom: 32px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-            transition: all 0.5s ease;
+        /* Geometric Icons - Swiss Pictogram Style */
+        .icon {
+            width: 48px;
+            height: 48px;
             position: relative;
-            overflow: hidden;
+            display: inline-block;
         }
 
-        .project::before {
+        .icon::before,
+        .icon::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            background: var(--blue);
         }
 
-        .project:hover {
-            border-color: var(--border-strong);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
-            transform: translateY(-4px);
+        /* Code/Terminal Icon */
+        .icon-code::before {
+            width: 24px;
+            height: 2px;
+            top: 16px;
+            left: 12px;
+            box-shadow: 0 6px 0 var(--blue), 0 12px 0 var(--blue);
         }
 
-        .project:hover::before {
-            opacity: 1;
+        .icon-code::after {
+            width: 8px;
+            height: 8px;
+            top: 20px;
+            right: 12px;
+            transform: rotate(45deg);
+            border: 2px solid var(--blue);
+            background: transparent;
         }
 
-        .project-header {
-            margin-bottom: 32px;
+        /* Users/Community Icon */
+        .icon-users::before {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            top: 8px;
+            left: 18px;
+            box-shadow: -8px 14px 0 -2px var(--blue), 8px 14px 0 -2px var(--blue);
         }
 
-        .project-title {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: var(--cream);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .project-meta {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            padding: 6px 14px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            color: var(--cream-muted);
-            letter-spacing: 0.05em;
-        }
-
-        .tag.primary {
-            background: var(--accent-subtle);
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        .project-content {
-            color: var(--cream-muted);
-            margin-bottom: 32px;
-            line-height: 1.8;
-        }
-
-        .project-content ul {
-            margin: 24px 0;
-            margin-left: 0;
-            list-style: none;
-        }
-
-        .project-content li {
-            margin-bottom: 16px;
-            padding-left: 24px;
-            position: relative;
-        }
-
-        .project-content li::before {
-            content: '—';
-            position: absolute;
-            left: 0;
-            color: var(--gold);
-            font-weight: 300;
-        }
-
-        .technical-note {
-            background: var(--bg-secondary);
-            border-left: 2px solid var(--gold);
-            padding: 24px 28px;
-            margin: 28px 0;
-            border-radius: 0 8px 8px 0;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            overflow-x: auto;
-        }
-
-        .technical-note-label {
-            font-weight: 500;
-            color: var(--gold);
-            margin-bottom: 12px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .project-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 40px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
-        }
-
-        .complexity {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--stone);
-        }
-
-        .project-links {
-            display: flex;
-            gap: 32px;
-        }
-
-        .project-link {
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .project-link:hover {
-            gap: 12px;
-            color: var(--gold-light);
-        }
-
-        .project-link svg {
-            width: 16px;
+        .icon-users::after {
+            width: 32px;
             height: 16px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 1.5;
+            border-radius: 16px 16px 0 0;
+            bottom: 8px;
+            left: 8px;
         }
 
-        /* Skills - Elegant notation */
-        .skills-container {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 48px;
-            text-align: center;
-            position: relative;
+        /* Award/Trophy Icon */
+        .icon-award::before {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            top: 8px;
+            left: 14px;
         }
 
-        .skills-container::before {
-            content: '❡';
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg-primary);
-            padding: 0 16px;
-            color: var(--gold);
-            font-size: 1.2rem;
+        .icon-award::after {
+            width: 12px;
+            height: 12px;
+            bottom: 8px;
+            left: 18px;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
         }
 
-        .skills-set {
-            font-family: var(--font-serif);
-            font-size: 1.2rem;
-            line-height: 2.2;
-            color: var(--cream-muted);
+        /* Chess/Knight Icon */
+        .icon-chess::before {
+            width: 16px;
+            height: 24px;
+            top: 8px;
+            left: 16px;
+            clip-path: polygon(50% 0%, 100% 40%, 80% 100%, 20% 100%, 0% 40%);
         }
 
-        .skills-set .set-name {
-            font-weight: 600;
-            color: var(--gold);
-            font-family: var(--font-mono);
-            font-style: normal;
+        .icon-chess::after {
+            width: 24px;
+            height: 4px;
+            bottom: 8px;
+            left: 12px;
+        }
+
+        /* Education/Book Icon */
+        .icon-edu::before {
+            width: 20px;
+            height: 24px;
+            top: 8px;
+            left: 14px;
+            border: 2px solid var(--blue);
+            background: transparent;
+        }
+
+        .icon-edu::after {
+            width: 12px;
+            height: 2px;
+            top: 14px;
+            left: 18px;
+            box-shadow: 0 4px 0 var(--blue), 0 8px 0 var(--blue);
+        }
+
+        /* Project/Grid Icon */
+        .icon-project::before {
+            width: 20px;
+            height: 20px;
+            top: 14px;
+            left: 14px;
+            border: 2px solid var(--blue);
+            background: transparent;
+        }
+
+        .icon-project::after {
+            width: 8px;
+            height: 8px;
+            top: 10px;
+            right: 10px;
+            background: var(--blue-light);
+        }
+
+        /* Header */
+        header {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-bottom: 6rem;
+            padding-bottom: 3rem;
+            border-bottom: 2px solid var(--fg);
+        }
+
+        .name {
+            grid-column: 1 / 5;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .role {
+            grid-column: 5 / 9;
+            color: var(--muted);
             font-size: 1rem;
         }
 
-        .skills-set .element {
-            color: var(--cream);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            padding: 4px 12px;
-            margin: 0 6px;
-            background: var(--bg-secondary);
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
+        .contact-header {
+            grid-column: 9 / -1;
+            text-align: right;
         }
 
-        .skills-set .element:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        /* Interests - Refined cards */
-        .interests {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-top: 48px;
-            padding-top: 48px;
-            border-top: 1px solid var(--border);
-        }
-
-        .interest-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 28px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-        .interest-item:hover {
-            border-color: var(--gold);
-            background: var(--surface-hover);
-        }
-
-        .interest-icon {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-secondary);
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            color: var(--gold);
-            flex-shrink: 0;
-        }
-
-        .interest-icon svg {
-            width: 20px;
-            height: 20px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 1.5;
-        }
-
-        .interest-content h4 {
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: var(--cream);
-        }
-
-        .interest-content p {
-            font-size: 0.9rem;
-            color: var(--cream-muted);
-            margin: 0;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-        }
-
-        .interest-content a {
-            color: var(--gold);
+        .contact-header a {
+            display: block;
+            font-size: 0.875rem;
+            color: var(--blue);
             text-decoration: none;
+            margin-bottom: 0.25rem;
         }
 
-        .interest-content a:hover {
+        .contact-header a:hover {
             text-decoration: underline;
         }
 
-        /* Hidden chess content */
-        .chess-hidden {
-            display: none;
-            margin-top: 16px;
-            padding: 16px;
-            background: var(--bg-secondary);
-            border-radius: 6px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            border-left: 2px solid var(--gold);
+        /* Typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            grid-column: 1 / -1;
+            letter-spacing: -0.03em;
         }
 
-        .chess-hidden.active {
-            display: block;
-            animation: slideDown 0.4s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Footer - Sophisticated */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 80px 6%;
-            margin-top: var(--section-gap);
-            background: var(--bg-secondary);
-        }
-
-        .footer-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 80px;
-        }
-
-        .footer-col h4 {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
+        h2 {
+            font-size: 0.875rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 24px;
-            color: var(--cream);
+            letter-spacing: 0.1em;
+            color: var(--blue);
+            margin-bottom: 2rem;
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             font-weight: 600;
         }
 
-        .footer-col p {
-            color: var(--cream-muted);
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--light);
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            max-width: 65ch;
+        }
+
+        /* Intro */
+        .intro {
+            grid-column: 1 / 8;
+            margin-bottom: 6rem;
+        }
+
+        .intro p {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            color: var(--muted);
+        }
+
+        .intro strong {
+            color: var(--fg);
+            font-weight: 600;
+        }
+
+        /* Sections */
+        section {
+            grid-column: 1 / -1;
+            margin-bottom: 5rem;
+        }
+
+        /* Ventures with Icons */
+        .ventures-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .venture {
+            border: 1px solid var(--light);
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .venture:hover {
+            border-color: var(--blue);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 var(--blue);
+        }
+
+        .venture-icon {
+            flex-shrink: 0;
+        }
+
+        .venture-content {
+            flex: 1;
+        }
+
+        .venture-status {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .venture p {
+            font-size: 0.9375rem;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+
+        .project {
+            border: 1px solid var(--light);
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .project:hover {
+            border-color: var(--blue);
+            transform: translate(-4px, -4px);
+            box-shadow: 4px 4px 0 var(--blue);
+        }
+
+        .project:nth-child(1) { grid-column: 1 / 7; }
+        .project:nth-child(2) { grid-column: 7 / -1; }
+        .project:nth-child(3) { grid-column: 1 / 5; }
+        .project:nth-child(4) { grid-column: 5 / 9; }
+        .project:nth-child(5) { grid-column: 9 / -1; }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-year {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+        }
+
+        .project h3 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .project p {
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tech {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--light);
+            color: var(--fg);
+            font-family: monospace;
+        }
+
+        .project-links {
+            margin-top: 1rem;
+        }
+
+        .project-links a {
+            font-size: 0.875rem;
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Credentials Grid */
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .credential {
+            border: 1px solid var(--light);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .credential:hover {
+            border-color: var(--blue);
+        }
+
+        .credential-icon {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .credential-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .credential-value {
+            font-size: 0.9375rem;
+            color: var(--fg);
+            line-height: 1.4;
+        }
+
+        /* Award - Full Width */
+        .award-item {
+            grid-column: 1 / -1;
+            border: 1px solid var(--light);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .award-content {
+            flex: 1;
+        }
+
+        .award-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .award-detail {
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        /* Footer */
+        footer {
+            grid-column: 1 / -1;
+            margin-top: 6rem;
+            padding-top: 3rem;
+            border-top: 2px solid var(--fg);
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+
+        .footer-info {
+            grid-column: 1 / 6;
+        }
+
+        .footer-links {
+            grid-column: 6 / -1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 1rem;
         }
 
         .footer-col a {
             display: block;
-            color: var(--cream-muted);
+            font-size: 0.9375rem;
+            color: var(--blue);
             text-decoration: none;
-            margin-bottom: 12px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
         }
 
         .footer-col a:hover {
-            color: var(--gold);
-            padding-left: 4px;
+            text-decoration: underline;
         }
 
-        .footer-bottom {
-            max-width: 1100px;
-            margin: 60px auto 0;
-            padding-top: 40px;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            color: var(--stone);
-            font-size: 0.8rem;
-            font-family: var(--font-mono);
-            letter-spacing: 0.1em;
+        .copyright {
+            grid-column: 1 / -1;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--light);
+            font-size: 0.875rem;
+            color: var(--muted);
         }
 
         /* Responsive */
         @media (max-width: 900px) {
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 48px;
+            body {
+                display: block;
+                padding: 24px;
             }
-            .hero-visual {
-                min-height: 200px;
-                order: -1;
-            }
-            .metrics-grid { 
-                grid-template-columns: 1fr; 
-            }
-            .interests { 
-                grid-template-columns: 1fr; 
-            }
-            .project-footer { 
-                flex-direction: column; 
-                gap: 20px; 
-                align-items: flex-start; 
-            }
-            .footer-content { 
-                grid-template-columns: 1fr 1fr; 
-                gap: 48px; 
-            }
-            .nav-links {
-                display: none;
-            }
-        }
 
-        @media (max-width: 600px) {
-            .footer-content {
+            header {
+                display: block;
+                margin-bottom: 3rem;
+            }
+
+            .name, .role, .contact-header {
+                margin-bottom: 1rem;
+            }
+
+            .contact-header {
+                text-align: left;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .ventures-grid,
+            .credentials-grid {
                 grid-template-columns: 1fr;
             }
+
+            .project:nth-child(n) {
+                grid-column: 1 / -1;
+            }
+
+            .projects-grid {
+                display: block;
+            }
+
             .project {
-                padding: 32px 24px;
+                margin-bottom: 1rem;
+            }
+
+            .footer-links {
+                grid-column: 1 / -1;
+                margin-top: 2rem;
             }
         }
 
-        /* Terminal mode easter egg */
-        body.terminal-mode {
-            --bg-primary: #000;
-            --bg-secondary: #0a0a0a;
-            --cream: #0f0;
-            --gold: #0f0;
-            --cream-muted: #0a0;
-            font-family: var(--font-mono);
+        /* Selection */
+        ::selection {
+            background: var(--blue);
+            color: white;
         }
 
-        body.terminal-mode .logo-seal {
-            border-color: #0f0;
-        }
-
-        body.terminal-mode .logo-seal span {
-            color: #0f0;
-        }
-
-        /* Konami indicator */
-        .konami-indicator {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 6px;
-            height: 6px;
-            background: var(--border);
-            border-radius: 50%;
-            transition: all 0.4s ease;
-            z-index: 999;
-        }
-
-        .konami-indicator.active {
-            background: var(--gold);
-            box-shadow: 0 0 12px var(--gold);
-        }
-
-        /* Decorative elements */
-        .corner-decoration {
-            position: fixed;
-            width: 120px;
-            height: 120px;
-            pointer-events: none;
-            opacity: 0.4;
-            z-index: 1;
-        }
-
-        .corner-decoration.top-left {
-            top: 100px;
-            left: 40px;
-            border-left: 1px solid var(--border);
-            border-top: 1px solid var(--border);
-        }
-
-        .corner-decoration.bottom-right {
-            bottom: 40px;
-            right: 40px;
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        /* Smooth reveal animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* Print */
+        @media print {
+            .venture:hover, .project:hover, .credential:hover {
+                transform: none;
+                box-shadow: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="konami-indicator" id="konami"></div>
-    <div class="corner-decoration top-left"></div>
-    <div class="corner-decoration bottom-right"></div>
-
     <header>
-        <a href="#" class="logo" onclick="toggleTerminal(event)" title="Click 3 times for terminal mode">
-            <div class="logo-seal">
-                <span>λ</span>
-            </div>
-            <span class="logo-text" data-en="A. Kern" data-et="A. Kern" data-ru="А. Kern" data-de="A. Kern">A. Kern</span>
-        </a>
-        
-        <div class="nav-container">
-            <nav class="nav-links">
-                <a href="#about" data-en="About" data-et="Minust" data-ru="Обо мне" data-de="Über mich">About</a>
-                <a href="#ventures" data-en="Ventures" data-et="Ettevõtmised" data-ru="Проекты" data-de="Projekte">Ventures</a>
-                <a href="#contact" data-en="Contact" data-et="Kontakt" data-ru="Контакт" data-de="Kontakt">Contact</a>
-            </nav>
-            
-            <div class="lang-switcher">
-                <button class="lang-btn active" onclick="setLang('en')">EN</button>
-                <button class="lang-btn" onclick="setLang('et')">ET</button>
-                <button class="lang-btn" onclick="setLang('ru')">RU</button>
-                <button class="lang-btn" onclick="setLang('de')">DE</button>
-            </div>
+        <div class="name">Akim Kern</div>
+        <div class="role">Founder & Systems Engineer<br>Tallinn, Estonia (UTC+2)</div>
+        <div class="contact-header">
+            <a href="mailto:akomon10@gmail.com">akomon10@gmail.com</a>
+            <a href="https://github.com/Akomon333">github.com/Akomon333</a>
+            <a href="https://www.linkedin.com/in/akim-s-9a1850343/">linkedin.com/in/akim-s</a>
         </div>
     </header>
 
-    <div class="container">
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-eyebrow">
-                    <span data-en="Founder & Civic Technologist" data-et="Asutaja ja kodanikutehnoloog" data-ru="Основатель и гражданский технолог" data-de="Gründer & Civic Technologist">Founder & Civic Technologist</span>
-                </div>
-                
-                <h1 data-en="Optimizing the intersection of <span class='accent'>data</span> and <span class='accent'>governance</span>." 
-                    data-et="Optimeerin <span class='accent'>andmete</span> ja <span class='accent'>valitsemise</span> ristumiskohta." 
-                    data-ru="Оптимизирую пересечение <span class='accent'>данных</span> и <span class='accent'>управления</span>." 
-                    data-de="Optimierung der Schnittstelle von <span class='accent'>Daten</span> und <span class='accent'>Governance</span>.">
-                    Optimizing the intersection of <span class="accent">data</span> and <span class="accent">governance</span>.
-                </h1>
-                
-                <p class="hero-subtitle" data-en="Building production-grade ML systems with measurable civic impact. Former technical founder, now applying optimization patterns to municipal infrastructure and public policy."
-                   data-et="Ehitades tootmiskvaliteediga ML-süsteeme mõõdetava kodanikumõjuga. Endine tehniline asutaja, nüüd optimeerimismustrite rakendamine munitsipaalinfrastruktuurile ja avalikule poliitikale."
-                   data-ru="Создание production-ready ML-систем с измеримым гражданским воздействием. Бывший технический основатель, теперь применяю паттерны оптимизации к муниципальной инфраструктуре и госполитике."
-                   data-de="Aufbau von produktionsreifen ML-Systemen mit messbarem bürgerschaftlichem Impact. Ehemaliger technischer Gründer, wende Optimierungsmuster auf kommunale Infrastruktur und öffentliche Politik an.">
-                    Building production-grade ML systems with measurable civic impact. Former technical founder, now applying optimization patterns to municipal infrastructure and public policy.
-                </p>
-
-                <div class="hero-meta">
-                    <span data-en="Tallinn Youth Council" data-et="Tallinna Noortekogu" data-ru="Молодёжный совет Таллинна" data-de="Jugendrat Tallinn">Tallinn Youth Council</span>
-                    <span>ML Engineering • Policy Design</span>
-                    <span>Est. 2020</span>
-                </div>
-
-                <div class="metrics-grid">
-                    <div class="metric">
-                        <div class="metric-value">08</div>
-                        <div class="metric-label" data-en="Shipped Products" data-et="Väljastatud toodet" data-ru="Запущено продуктов" data-de="Produkte Shipped">Shipped Products</div>
-                        <div class="metric-delta">Production systems</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">O(1)</div>
-                        <div class="metric-label" data-en="Deployment Cycle" data-et="Juurutustsükkel" data-ru="Цикл деплоя" data-de="Deployment-Zyklus">Deployment Cycle</div>
-                        <div class="metric-delta" data-en="Weekly iterations" data-et="Nädalased iteratsioonid" data-ru="Недельные итерации" data-de="Wöchentliche Iterationen">Weekly iterations</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">0.92</div>
-                        <div class="metric-label" data-en="Model Performance" data-et="Mudeli jõudlus" data-ru="Производительность модели" data-de="Modell-Performance">Model Performance</div>
-                        <div class="metric-delta">F1 weighted avg</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-visual"></div>
-        </section>
-
-        <section id="about">
-            <div class="section-header">
-                <span class="section-number">§01</span>
-                <h2 data-en="Background & Methodology" data-et="Taust ja metodoloogia" data-ru="Бэкграунд и методология" data-de="Hintergrund & Methodik">Background & Methodology</h2>
-                <span class="section-subtitle" data-en="Constraint-driven development" data-et="Piirangutepõhine arendus" data-ru="Разработка под ограничения" data-de="Bedingungsgetriebene Entwicklung">Constraint-driven development</span>
-            </div>
-
-            <p class="lead" data-en="Started with Lua and 3D modeling in Roblox (Dec 2020), optimizing for rapid iteration under resource constraints. This foundation in systems thinking now informs machine learning pipelines and civic infrastructure design."
-               data-et="Alustasin Lua ja 3D-modelleerimisega Robloxis (dets 2020), optimeerides kiiret iteratsiooni ressursipiirangute all. See süsteemse mõtlemise alus informeerib nüüd masinõppe torustikke ja kodanikuinfrastruktuuri disaini."
-               data-ru="Начал с Lua и 3D-моделирования в Roblox (дек 2020), оптимизируя быструю итерацию под ограничения ресурсов. Эта база системного мышления теперь информирует ML-пайплайны и дизайн гражданской инфраструктуры."
-               data-de="Gestartet mit Lua und 3D-Modellierung in Roblox (Dez 2020), optimiert für schnelle Iteration unter Ressourcenbeschränkungen. Dieses Fundament im Systemdenken informiert nun ML-Pipelines und Bürgerinfrastruktur-Design.">
-                Started with <strong>Lua</strong> and <strong>3D modeling</strong> in Roblox (Dec 2020), optimizing for rapid iteration under resource constraints. This foundation in systems thinking now informs machine learning pipelines and civic infrastructure design.
-            </p>
-
-            <p data-en="Elected to Tallinn Youth Council in 2025. Applying data-driven decision frameworks to municipal policy, with focus on participatory budgeting and youth engagement optimization."
-               data-et="Valiti Tallinna Noortekogusse 2025. Andmepõhiste otsuste raamistike rakendamine munitsipaalpoliitikale, keskendudes osaluseelarvele ja noorte kaasatuse optimeerimisele."
-               data-ru="Избран в Молодёжный совет Таллинна в 2025. Применяю data-driven фреймворки принятия решений к муниципальной политике с фокусом на участвительное бюджетирование и оптимизацию вовлечённости молодёжи."
-               data-de="2025 in den Jugendrat Tallinn gewählt. Anwendung datengestützter Entscheidungsrahmen auf kommunale Politik, mit Fokus auf partizipatives Budgeting und Jugendbeteiligungs-Optimierung.">
-                Elected to <strong>Tallinn Youth Council</strong> in 2025. Applying data-driven decision frameworks to municipal policy, with focus on participatory budgeting and youth engagement optimization.
-            </p>
-
-            <div class="interests">
-                <div class="interest-item">
-                    <div class="interest-icon">
-                        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    </div>
-                    <div class="interest-content">
-                        <h4 data-en="Reading" data-et="Lugemine" data-ru="Чтение" data-de="Lesen">Reading</h4>
-                        <p data-en="History of optimization" data-et="Optimeerimise ajalugu" data-ru="История оптимизации" data-de="Geschichte der Optimierung">History of optimization</p>
-                    </div>
-                </div>
-                
-                <div class="interest-item" onclick="toggleChess()" style="cursor: pointer;">
-                    <div class="interest-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    </div>
-                    <div class="interest-content">
-                        <h4>Lichess</h4>
-                        <p data-en="Strategic games" data-et="Strateegilised mängud" data-ru="Стратегические игры" data-de="Strategische Spiele">Strategic games</p>
-                        
-                        <div class="chess-hidden" id="chess-easter">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Blitz: ~1400</span>
-                                <a href="https://lichess.org/@/Akomon777" target="_blank" style="color: var(--gold);">@Akomon777 →</a>
-                            </div>
-                            <div style="margin-top: 8px; font-size: 0.75rem; opacity: 0.7;">
-                                1. e4 e5 2. Nf3 Nc6 3. Bc4 (Italian Game)
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="ventures">
-            <div class="section-header">
-                <span class="section-number">§02</span>
-                <h2 data-en="Selected Ventures" data-et="Valitud ettevõtmised" data-ru="Избранные проекты" data-de="Ausgewählte Projekte">Selected Ventures</h2>
-                <span class="section-subtitle" data-en="Production systems" data-et="Tootmissüsteemid" data-ru="Продакшн системы" data-de="Produktionssysteme">Production systems</span>
-            </div>
-
-            <!-- Meteorite Project -->
-            <article class="project">
-                <div class="project-header">
-                    <h3 class="project-title" data-en="Asteroid Mining Intelligence Platform" 
-                        data-et="Asteroidide kaevandamise luureplatvorm"
-                        data-ru="Платформа интеллекта астероидной добычи"
-                        data-de="Asteroiden-Mining-Intelligenz-Plattform">
-                        Asteroid Mining Intelligence Platform
-                    </h3>
-                    <div class="project-meta">
-                        <span class="tag primary">Computer Vision</span>
-                        <span class="tag">Spectral Analysis</span>
-                        <span class="tag">XGBoost</span>
-                        <span class="tag">Flask API</span>
-                    </div>
-                </div>
-
-                <div class="project-content">
-                    <p data-en="Production-grade API for automated mineral composition analysis from meteorite imagery. Developed as feasibility study for asteroid mining ventures, featuring real-time spectral inference and 3D topology reconstruction."
-                       data-et="Tootmiskvaliteediga API meteoriitide piltide automaatseks mineraalkoostise analüüsiks. Arendatud kui elujõulisuse uuring asteroidide kaevandamise ettevõtmistele, koos reaalajas spektraalse järelduse ja 3D topoloogia rekonstrueerimisega."
-                       data-ru="Production-grade API для автоматического анализа минерального состава из изображений метеоритов. Разработано как исследование жизнеспособности для астероидных майнинговых предприятий, с real-time спектральным инференсом и 3D реконструкцией топологии."
-                       data-de="Produktionsreife API für automatisierte Mineralzusammensetzungsanalyse aus Meteoritenbildern. Entwickelt als Machbarkeitsstudie für Asteroiden-Mining-Ventures, mit Echtzeit-Spektralinferenz und 3D-Topologie-Rekonstruktion.">
-                        Production-grade API for automated mineral composition analysis from meteorite imagery. Developed as feasibility study for asteroid mining ventures, featuring real-time spectral inference and 3D topology reconstruction.
-                    </p>
-
-                    <ul>
-                        <li data-en="Segmentation: Otsu's adaptive thresholding for background isolation, RGB mean extraction for spectral signatures" 
-                            data-et="Segmenteerimine: Otsu adaptiivne lävendamine tausta isoleerimiseks, RGB keskmise ekstraheerimine spektraalsete signatuuride jaoks"
-                            data-ru="Сегментация: адаптивное пороговое значение Отсу для изоляции фона, извлечение среднего RGB для спектральных сигнатур"
-                            data-de="Segmentierung: Otsu-adaptive Schwellenwertbildung zur Hintergrundisolation, RGB-Mittelwertextraktion für Spektralsignaturen">
-                            <strong>Segmentation:</strong> Otsu's adaptive thresholding for background isolation, RGB mean extraction for spectral signatures
-                        </li>
-                        <li data-en="Inference: XGBoost ensemble for Ni/Ir/Au concentration prediction with graceful degradation to deterministic heuristics"
-                            data-et="Inference: XGBoost ansambel Ni/Ir/Au kontsentratsiooni ennustamiseks graceful degradation'iga deterministlike heuristikuteni"
-                            data-ru="Inference: ансамбль XGBoost для предсказания концентрации Ni/Ir/Au с graceful degradation до детерминированных эвристик"
-                            data-de="Inference: XGBoost-Ensemble für Ni/Ir/Au-Konzentrationsvorhersage mit Graceful Degradation zu deterministischen Heuristiken">
-                            <strong>Inference:</strong> XGBoost ensemble for Ni/Ir/Au concentration prediction with graceful degradation to deterministic heuristics
-                        </li>
-                        <li data-en="Topology: 128×128 displacement mapping via blob detection and Gaussian smoothing for terrain generation"
-                            data-et="Topoloogia: 128×128 nihkemapping blob-tuvastuse ja Gaussi silumise kaudu maastiku genereerimiseks"
-                            data-ru="Топология: 128×128 displacement mapping через blob detection и Gaussian smoothing для генерации террейна"
-                            data-de="Topologie: 128×128 Displacement-Mapping via Blob-Detection und Gaussian Smoothing für Geländegenerierung">
-                            <strong>Topology:</strong> 128×128 displacement mapping via blob detection and Gaussian smoothing for terrain generation
-                        </li>
-                    </ul>
-
-                    <div class="technical-note">
-                        <div class="technical-note-label">API Response Schema</div>
-                        <div style="color: var(--cream-muted); line-height: 1.6;">
-                            {<br>
-                            &nbsp;&nbsp;<span style="color: var(--gold);">"composition"</span>: {<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--cream);">"nickel_pct"</span>: 10.5,<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--cream);">"iridium_ppm"</span>: 3.2,<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--cream);">"gold_ppm"</span>: 0.8<br>
-                            &nbsp;&nbsp;},<br>
-                            &nbsp;&nbsp;<span style="color: var(--gold);">"economics"</span>: {<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--cream);">"value_usd_per_ton"</span>: 2500.0,<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--cream);">"mission_risk"</span>: 0.45<br>
-                            &nbsp;&nbsp;}<br>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-footer">
-                    <span class="complexity">Time: O(n log n) | Space: O(n²)</span>
-                    <div class="project-links">
-                        <a href="https://github.com/Akomon333" class="project-link" target="_blank">
-                            <span>View Implementation</span>
-                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </article>            
-
-            <!-- Lasnamäe Project -->
-            <article class="project">
-                <div class="project-header">
-                    <h3 class="project-title" data-en="Electoral Prediction Engine" 
-                        data-et="Valimisennustuse mootor"
-                        data-ru="Предиктивный движок выборов"
-                        data-de="Wahlprognose-Engine">
-                        Electoral Prediction Engine
-                    </h3>
-                    <div class="project-meta">
-                        <span class="tag primary">Neural Network</span>
-                        <span class="tag">React</span>
-                        <span class="tag">Simulation</span>
-                        <span class="tag">Geospatial</span>
-                    </div>
-                </div>
-
-                <div class="project-content">
-                    <p data-en="Web-based inference system matching demographic profiles to district-level electoral outcomes. Neural network trained on Estonian electoral data with synthetic generation capabilities for scenario modeling."
-                       data-et="Veebipõhine järeldussüsteem, mis sobitab demograafilised profiilid linnaosa tasandi valimistulemustega. Närvivõrk treenitud Eesti valimisandmetel sünteetilise genereerimise võimalustega stsenaariumide modelleerimiseks."
-                       data-ru="Веб-система инференса, сопоставляющая демографические профили с результатами выборов на уровне района. Нейросеть обучена на эстонских избирательных данных с возможностями синтетической генерации для моделирования сценариев."
-                       data-de="Web-basiertes Inferenzsystem zur Abstimmung demografischer Profile mit Wahlergebnissen auf Bezirksebene. Neuronales Netz auf estnischen Wahldaten trainiert mit synthetischen Generierungsfähigkeiten für Szenariomodellierung.">
-                        Web-based inference system matching demographic profiles to district-level electoral outcomes. Neural network trained on Estonian electoral data with synthetic generation capabilities for scenario modeling.
-                    </p>
-                </div>
-
-                <div class="project-footer">
-                    <span class="complexity">Inference latency: ~50ms</span>
-                    <div class="project-links">
-                        <a href="https://akomon333.github.io/Fantasy-Lasna-Campaign-Predictor" class="project-link" target="_blank">
-                            <span>Live Demo</span>
-                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                        </a>
-                        <a href="https://github.com/Akomon333/Fantasy-Lasna-Campaign-Predictor" class="project-link" target="_blank">
-                            <span>Source</span>
-                            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Civic Project -->
-            <article class="project" style="border-left: 3px solid var(--gold);">
-                <div class="project-header">
-                    <h3 class="project-title" data-en="Youth Participation Optimization" 
-                        data-et="Noorte osaluse optimeerimine"
-                        data-ru="Оптимизация участия молодёжи"
-                        data-de="Jugendbeteiligungs-Optimierung">
-                        Youth Participation Optimization
-                    </h3>
-                    <div class="project-meta">
-                        <span class="tag">Erasmus+</span>
-                        <span class="tag">Policy Design</span>
-                        <span class="tag">Lasnamäe District</span>
-                        <span class="tag" data-en="Active" data-et="Aktiivne" data-ru="Активно" data-de="Aktiv">Active</span>
-                    </div>
-                </div>
-
-                <div class="project-content">
-                    <p data-en="Lasnamäe District, Tallinn. Maximizing youth engagement (ages 14-26) via participatory budgeting and feedback loop systems. Constraint: Limited municipal resources. Objective: Quality of life metrics."
-                       data-et="Lasnamäe linnaosa, Tallinn. Noorte kaasatuse (vanuses 14-26) maksimeerimine osaluseelarvete ja tagasiside tsüklite kaudu. Piirang: piiratud munitsipaalressursid. Eesmärk: elukvaliteedi mõõdikud."
-                       data-ru="Район Ласнамяэ, Таллин. Максимизация вовлечённости молодёжи (14-26 лет) через участвительное бюджетирование и системы петель обратной связи. Ограничение: ограниченные муниципальные ресурсы. Цель: метрики качества жизни."
-                       data-de="Bezirk Lasnamäe, Tallinn. Maximierung der Jugendbeteiligung (14-26 Jahre) via partizipativem Budgeting und Feedback-Loop-Systemen. Bedingung: Begrenzte kommunale Ressourcen. Ziel: Lebensqualitätsmetriken.">
-                        <strong>Lasnamäe District, Tallinn.</strong> Maximizing youth engagement (ages 14-26) via participatory budgeting and feedback loop systems. <strong>Constraint:</strong> Limited municipal resources. <strong>Objective:</strong> Quality of life metrics.
-                    </p>
-                </div>
-
-                <div class="project-footer">
-                    <span class="complexity">Since 2025 • Tallinn Youth Council</span>
-                </div>
-            </article>
-        </section>
-
-        <section>
-            <div class="section-header">
-                <span class="section-number">§03</span>
-                <h2 data-en="Technical Competencies" data-et="Tehnilised pädevused" data-ru="Технические компетенции" data-de="Technische Kompetenzen">Technical Competencies</h2>
-                <span class="section-subtitle">Stack</span>
-            </div>
-
-            <div class="skills-container">
-                <div class="skills-set">
-                    <span class="set-name">S</span> = {<span class="element">Python</span>, <span class="element">OpenCV</span>, <span class="element">XGBoost</span>, <span class="element">Flask</span>, <span class="element">PostgreSQL</span>, <span class="element">Pandas</span>, <span class="element">NumPy</span>, <span class="element">Scikit-learn</span>, <span class="element">Git</span>, <span class="element">Linux</span>}<br>
-                    <span style="margin-top: 16px; display: block; font-size: 1.1rem;">
-                        <span class="set-name">D</span> = {<span class="element" data-en="Computer Vision" data-et="Arvutinägemine" data-ru="Компьютерное зрение" data-de="Computer Vision">Computer Vision</span>, <span class="element" data-en="Predictive Modeling" data-et="Ennustav modelleerimine" data-ru="Предиктивное моделирование" data-de="Prädiktive Modellierung">Predictive Modeling</span>, <span class="element" data-en="Public Policy" data-et="Avalik poliitika" data-ру="Государственная политика" data-de="Öffentliche Politik">Public Policy</span>} ⊂ <span class="set-name">S</span>
-                    </span>
-                </div>
-            </div>
-        </section>
+    <div class="intro">
+        <p>
+            Building <strong>production-grade systems</strong> at the intersection of 
+            machine learning and civic infrastructure. Currently developing a 
+            <strong>construction industry marketplace platform</strong> as a practice project 
+            and serving as <strong>Founder of Lasnamäe IT Club</strong>.
+        </p>
     </div>
 
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-col">
-                <h4 data-en="Direct Contact" data-et="Otsene kontakt" data-ru="Прямой контакт" data-de="Direkter Kontakt">Direct Contact</h4>
-                <p>akomon10@gmail.com</p>
-                <p style="margin-top: 12px; font-size: 0.8rem; opacity: 0.7;">Tallinn, Estonia (UTC+2)</p>
-            </div>
+    <section id="ventures">
+        <h2>Entrepreneurship & Programs</h2>
+        <div class="ventures-grid">
+            <article class="venture">
+                <div class="venture-icon">
+                    <div class="icon icon-users"></div>
+                </div>
+                <div class="venture-content">
+                    <div class="venture-status">January - April 2026</div>
+                    <h3>Lasnamäe IT Club</h3>
+                    <p>Founded and run an IT-focused club in Lasnamäe, Tallinn's largest district, aimed at building a tech-literate youth community in an underserved area.</p>
+                </div>
+            </article>
             
-            <div class="footer-col">
-                <h4>Professional</h4>
-                <a href="https://github.com/Akomon333" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/akim-s-9a1850343/" target="_blank">LinkedIn</a>
+            <article class="venture">
+                <div class="venture-icon">
+                    <div class="icon icon-code"></div>
+                </div>
+                <div class="venture-content">
+                    <div class="venture-status">Ongoing — Erasmus+</div>
+                    <h3>Noored kui linnaosa areng</h3>
+                    <p>International project organizing community events in Lasnamäe. Co-organized a student conference attended by 80+ students covering argumentation skills and youth opportunities in Tallinn. Current goal: establishing a formal Lasnamäe youth council.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Selected Projects</h2>
+        <div class="projects-grid">
+            <article class="project">
+                <div class="project-header">
+                    <h3>Fantasy Lasnamäe Campaign</h3>
+                    <span class="project-year">2025</span>
+                </div>
+                <p>Interactive web app overlaying a real map of Lasnamäe with AI-powered campaign strategy tiles. Neural network predicts party popularity by district.</p>
+                <div class="project-tech">
+                    <span class="tech">JavaScript</span>
+                    <span class="tech">Leaflet.js</span>
+                    <span class="tech">Flask</span>
+                    <span class="tech">Python</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://akomon333.github.io/Fantasy-Lasna-Campaign-Predictor">Live Demo →</a>
+                    <a href="https://github.com/Akomon333">Source →</a>
+                </div>
+            </article>
+
+            <article class="project">
+                <div class="project-header">
+                    <h3>Meteorite Mining Analysis API</h3>
+                    <span class="project-year">2026</span>
+                </div>
+                <p>Flask API analyzing meteorite images to estimate mineral composition (nickel, iridium, gold), mining risk, and 3D surface topology. Built in one week.</p>
+                <div class="project-tech">
+                    <span class="tech">OpenCV</span>
+                    <span class="tech">XGBoost</span>
+                    <span class="tech">Flask</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Akomon333/Meteorite-Mining-Analysis-API">Source →</a>
+                </div>
+            </article>
+
+            <article class="project">
+                <div class="project-header">
+                    <h3>NYC Youth Employment Analysis</h3>
+                    <span class="project-year">2025</span>
+                </div>
+                <p>Data science project analyzing NYC's Summer Youth Employment Program dataset. Applied HDBSCAN clustering and correlation analysis.</p>
+                <div class="project-tech">
+                    <span class="tech">Python</span>
+                    <span class="tech">HDBSCAN</span>
+                    <span class="tech">Pandas</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Akomon333">Source →</a>
+                </div>
+            </article>
+
+            <article class="project">
+                <div class="project-header">
+                    <h3>Construction Marketplace</h3>
+                    <span class="project-year">2026</span>
+                </div>
+                <p>Practice project developing a marketplace platform for the construction industry. Building core infrastructure and marketplace mechanics.</p>
+                <div class="project-tech">
+                    <span class="tech">Practice Project</span>
+                    <span class="tech">Full Stack</span>
+                </div>
+            </article>
+
+            <article class="project">
+                <div class="project-header">
+                    <h3>Roblox Development</h3>
+                    <span class="project-year">2021–2025</span>
+                </div>
+                <p>Started with Lua and 3D modeling in Roblox, building computational physics simulations and formal systems under resource constraints.</p>
+                <div class="project-tech">
+                    <span class="tech">Lua</span>
+                    <span class="tech">3D Modeling</span>
+                    <span class="tech">Systems Design</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="credentials">
+        <h2>Credentials</h2>
+        <div class="credentials-grid">
+            <div class="credential">
+                <div class="credential-icon">
+                    <div class="icon icon-edu"></div>
+                </div>
+                <div class="credential-label">Academic Performance</div>
+                <div class="credential-value">Top grades in <strong>Mathematics</strong> and <strong>Physics</strong> (A, Estonian gymnasium curriculum)</div>
             </div>
-            
-            <div class="footer-col">
-                <h4 data-en="Messaging" data-et="Sõnumid" data-ru="Сообщения" data-de="Nachrichten">Messaging</h4>
-                <a href="https://t.me/Jghncyncx" target="_blank">Telegram</a>
+
+            <div class="credential">
+                <div class="credential-icon">
+                    <div class="icon icon-edu"></div>
+                </div>
+                <div class="credential-label">Languages</div>
+                <div class="credential-value">Completed <strong>Goethe-Institut A1 and A2</strong> German language programs</div>
             </div>
-            
-            <div class="footer-col">
-                <h4 data-en="Chess" data-et="Male" data-ru="Шахматы" data-de="Schach">Chess</h4>
-                <a href="https://lichess.org/@/Akomon777" target="_blank">Lichess</a>
-                <span style="font-size: 0.75rem; color: var(--stone); margin-top: 8px; display: block; font-family: var(--font-mono);">
-                    1.e4 e5 2.Nf3 Nc6 3.Bc4
-                </span>
+
+            <div class="credential">
+                <div class="credential-icon">
+                    <div class="icon icon-project"></div>
+                </div>
+                <div class="credential-label">Experience</div>
+                <div class="credential-value">No formal work experience. Developing projects independently.</div>
             </div>
         </div>
+
+        <div class="award-item">
+            <div class="icon icon-chess"></div>
+            <div class="award-content">
+                <div class="award-title">Lasnamäe Chess Championship</div>
+                <div class="award-detail">2nd Place — Competitive chess player with strategic analytical skills</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-info">
+            <p style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Akim Kern</p>
+            <p style="color: var(--muted);">Systems engineer and founder building production-grade civic infrastructure and machine learning applications.</p>
+        </div>
         
-        <div class="footer-bottom">
-            <p>λ = <span id="lambda-val">1.618034</span> | <span data-en="Built with precision" data-et="Ehitatud täpsusega" data-ru="Построено с точностью" data-de="Mit Präzision gebaut">Built with precision</span> | © 2026</p>
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="mailto:akomon10@gmail.com">Email</a>
+                <a href="https://t.me/Jghncyncx">Telegram</a>
+            </div>
+            <div class="footer-col">
+                <h4>Profiles</h4>
+                <a href="https://github.com/Akomon333">GitHub</a>
+                <a href="https://www.linkedin.com/in/akim-s-9a1850343/">LinkedIn</a>
+            </div>
+            <div class="footer-col">
+                <h4>Projects</h4>
+                <a href="https://akomon333.github.io/Fantasy-Lasna-Campaign-Predictor">Campaign Predictor</a>
+                <a href="https://lichess.org/@/Akomon777">Lichess (~1400)</a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© 2026 Akim Kern. Designed with Swiss precision in Tallinn, Estonia.</p>
         </div>
     </footer>
-
-    <script>
-        // Language switching
-        let currentLang = localStorage.getItem('lang') || 'en';
-        
-        function setLang(lang) {
-            currentLang = lang;
-            localStorage.setItem('lang', lang);
-            
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
-            });
-            
-            document.querySelectorAll(`[data-${lang}]`).forEach(el => {
-                const content = el.getAttribute(`data-${lang}`);
-                if (content) {
-                    if (content.includes('<')) {
-                        el.innerHTML = content;
-                    } else {
-                        el.textContent = content;
-                    }
-                }
-            });
-        }
-
-        // Chess easter egg
-        function toggleChess() {
-            const egg = document.getElementById('chess-easter');
-            egg.classList.toggle('active');
-        }
-
-        // Terminal mode (click logo 3 times)
-        let logoClicks = 0;
-        let lastClick = 0;
-        
-        function toggleTerminal(e) {
-            e.preventDefault();
-            const now = Date.now();
-            if (now - lastClick > 1000) logoClicks = 0;
-            logoClicks++;
-            lastClick = now;
-            
-            if (logoClicks >= 3) {
-                document.body.classList.toggle('terminal-mode');
-                logoClicks = 0;
-                document.getElementById('konami').classList.add('active');
-                setTimeout(() => {
-                    document.getElementById('konami').classList.remove('active');
-                }, 1000);
-            }
-        }
-
-        // Konami code easter egg
-        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        let konamiIndex = 0;
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === konamiCode[konamiIndex]) {
-                konamiIndex++;
-                document.getElementById('konami').style.opacity = konamiIndex / 10;
-                if (konamiIndex === konamiCode.length) {
-                    alert('CV: https://github.com/Akomon333/cv.pdf');
-                    konamiIndex = 0;
-                }
-            } else {
-                konamiIndex = 0;
-                document.getElementById('konami').style.opacity = 0.3;
-            }
-        });
-
-        // Lambda value (golden ratio)
-        document.getElementById('lambda-val').textContent = '1.618034';
-
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.project, .metric, .interest-item').forEach(el => {
-            el.classList.add('reveal');
-            observer.observe(el);
-        });
-
-        setLang(currentLang);
-    </script>
 </body>
 </html>
-
-
