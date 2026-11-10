@@ -1,0 +1,40 @@
+# Akim Kern
+
+> Personal website of Akim Kern — founder of AkoDB, based in Tallinn, Estonia.
+
+Akim Kern is a fan of databases/data and a student from Tallinn, Estonia. He founded AkoDB,
+developed games on Roblox from 2021 to 2025 (520K+ total visits), was elected to
+the Tallinn Youth Council in 2025 for a 2-year term, and founded and ran the Lasnamäe IT
+Club in 2026. 
+
+## Pages
+
+- Home (#home): name, role (Founder of AkoDB), portrait.
+- About (#about): chess, tech niches, Roblox development 2021-2025, Tallinn
+  Youth City Council, Lasnamäe IT Club.
+- Projects (#projects): filterable list (All / Programming / Other) with
+  expandable rows.
+- Contact (#contact): email, GitHub, LinkedIn, Lichess.
+- Privacy (#privacy): privacy policy and hosting notes.
+- llms.txt (#llms): this file, rendered on the page.
+
+## Projects
+
+- AkoDB (2026 - Present, Programming): "Innovation and safety first." Started as
+  a practice project in the summer; grew as people took interest.
+- Estonian Presidential Hackathon sponsored by OpenAI (2026, Programming):
+  team reached the finals after product and idea review from the mentors.
+- Meteorite Mining API (2026, Programming): Flask API that predicts mineral
+  composition and mining risk from meteorite imagery using a convolutional
+  neural network; API design and database integration.
+- Lasnamäe IT Club (2026, Other): founded an IT club in Tallinn's largest
+  district; taught tech topics, made quizzes and presentations.
+- Tallinn Youth Council (2025 - 2027, Other): elected to represent Lasnamäe;
+  learned how politics and bureaucracy work.
+
+## Contact
+
+- Email: akim.kern@gmail.com
+- GitHub: https://github.com/Akomon333
+- LinkedIn: https://www.linkedin.com/in/akim-kern-9a1850343
+- Lichess: https://lichess.org/@/Akomon777
