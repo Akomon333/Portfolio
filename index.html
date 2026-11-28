@@ -77,6 +77,24 @@
     background: #efefef;
   }
 
+  .about-line {
+    display: flex;
+    align-items: flex-start;
+    gap: .7rem;
+  }
+
+  .ico {
+    flex: 0 0 auto;
+    width: 28px; height: 28px;
+    margin-top: .1rem;
+    shape-rendering: crispEdges;
+    image-rendering: pixelated;
+  }
+
+  @media (max-width: 40rem) {
+    .ico { width: 24px; height: 24px; }
+  }
+
   .filters { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0; }
 
   .filters input {
@@ -124,6 +142,17 @@
   .filters input:focus-visible + label {
     outline: 2px solid #3d5fd0; outline-offset: 2px;
   }
+
+  .links { list-style: none; padding: 0; margin: 0 0 1rem; }
+
+  .links li {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    margin: 0 0 .55rem;
+  }
+
+  .links .ico { width: 22px; height: 22px; margin-top: 0; }
 
   .projects { border: 1px solid #999; overflow: hidden; }
 
@@ -362,12 +391,30 @@
 
   <section class="page" id="about">
     <h2>About</h2>
-    <p>At 16 years old, I met the Prime Minister of Estonia. When I was 15, I met 5+ members of parliament, the president of Estonia, 1+ EU parliament members, many other political figures, and at least one founder of a unicorn.</p>
-    <p>Won an election for a 2-year term in the Tallinn Youth City Council in 2025, and founded and ran the Lasnamäe IT Club in 2026.</p>
-    <p>I used to develop games on Roblox 2021–2025, freelanced, found teams, and worked on various projects of mine and others. In total 520K+ visits. Many times my friends and I made games together so we can share our ideas and create something amazing to play.</p>
-    <p>I spend my free time reading about different technology industries breakthroughs to combine this knoweledge to see full picture and make great decisions regarding strategy/architecture.</p>
-    <p>I like playing chess/strategy videogames and learning about different niches of tech.</p>
-    <p>I recently played a VC simulation game where you need to choose startups to invest in based on their potential. As a startup founder it gave me perspective of VCs and learnt more about metrics of a VC fund. Many of my runs ended up on weekly leaderboards.</p>
+    <p class="about-line">
+      <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="parliament building"><rect x="7" y="2" width="2" height="1" fill="#3d5fd0"/><rect x="6" y="3" width="4" height="1" fill="#3d5fd0"/><rect x="5" y="4" width="6" height="1" fill="#3d5fd0"/><rect x="4" y="5" width="8" height="1" fill="#3d5fd0"/><rect x="3" y="6" width="10" height="1" fill="#2c47a8"/><rect x="4" y="7" width="1" height="5" fill="#8ea3e0"/><rect x="6" y="7" width="1" height="5" fill="#8ea3e0"/><rect x="9" y="7" width="1" height="5" fill="#8ea3e0"/><rect x="11" y="7" width="1" height="5" fill="#8ea3e0"/><rect x="3" y="12" width="10" height="1" fill="#2c47a8"/><rect x="2" y="13" width="12" height="1" fill="#3d5fd0"/></svg>
+      <span>At 16 years old, I met the Prime Minister of Estonia. When I was 15, I met 5+ members of parliament, the president of Estonia, 1+ EU parliament members, many other political figures, and at least one founder of a unicorn.</span>
+    </p>
+    <p class="about-line">
+      <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="ballot box"><rect x="5" y="3" width="6" height="1" fill="#8ea3e0"/><rect x="5" y="3" width="1" height="5" fill="#8ea3e0"/><rect x="10" y="3" width="1" height="5" fill="#8ea3e0"/><rect x="6" y="4" width="4" height="4" fill="#f3f5fa"/><rect x="9" y="4" width="1" height="1" fill="#2f9e5e"/><rect x="8" y="5" width="1" height="1" fill="#2f9e5e"/><rect x="7" y="6" width="1" height="1" fill="#2f9e5e"/><rect x="6" y="5" width="1" height="1" fill="#2f9e5e"/><rect x="1" y="8" width="14" height="1" fill="#2c47a8"/><rect x="6" y="8" width="4" height="1" fill="#19234a"/><rect x="2" y="9" width="12" height="5" fill="#3d5fd0"/><rect x="2" y="9" width="1" height="5" fill="#8ea3e0"/></svg>
+      <span>Won an election for a 2-year term in the Tallinn Youth City Council in 2025, and founded and ran the Lasnamäe IT Club in 2026.</span>
+    </p>
+    <p class="about-line">
+      <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="game controller"><rect x="2" y="6" width="12" height="6" fill="#3d5fd0"/><rect x="1" y="7" width="1" height="4" fill="#3d5fd0"/><rect x="14" y="7" width="1" height="4" fill="#3d5fd0"/><rect x="2" y="12" width="2" height="1" fill="#2c47a8"/><rect x="12" y="12" width="2" height="1" fill="#2c47a8"/><rect x="4" y="7" width="1" height="3" fill="#ffffff"/><rect x="3" y="8" width="3" height="1" fill="#ffffff"/><rect x="11" y="7" width="2" height="2" fill="#ffd166"/><rect x="9" y="9" width="2" height="2" fill="#e05a5a"/></svg>
+      <span>I used to develop games on Roblox 2021–2025, freelanced, found teams, and worked on various projects of mine and others. In total 520K+ visits. Many times my friends and I made games together so we can share our ideas and create something amazing to play.</span>
+    </p>
+    <p class="about-line">
+      <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="open book"><rect x="2" y="3" width="5" height="1" fill="#2c47a8"/><rect x="1" y="4" width="1" height="9" fill="#2c47a8"/><rect x="1" y="13" width="7" height="1" fill="#2c47a8"/><rect x="7" y="3" width="1" height="10" fill="#2c47a8"/><rect x="2" y="4" width="5" height="9" fill="#ffffff"/><rect x="3" y="6" width="3" height="1" fill="#8ea3e0"/><rect x="3" y="8" width="3" height="1" fill="#8ea3e0"/><rect x="3" y="10" width="3" height="1" fill="#8ea3e0"/><rect x="9" y="3" width="5" height="1" fill="#2c47a8"/><rect x="14" y="4" width="1" height="9" fill="#2c47a8"/><rect x="8" y="13" width="7" height="1" fill="#2c47a8"/><rect x="8" y="3" width="1" height="10" fill="#2c47a8"/><rect x="9" y="4" width="5" height="9" fill="#ffffff"/><rect x="10" y="6" width="3" height="1" fill="#8ea3e0"/><rect x="10" y="8" width="3" height="1" fill="#8ea3e0"/><rect x="10" y="10" width="3" height="1" fill="#8ea3e0"/><rect x="2" y="14" width="12" height="1" fill="#8ea3e0"/><rect x="11" y="13" width="1" height="2" fill="#e05a5a"/></svg>
+      <span>I spend my free time reading about different technology industries breakthroughs to combine this knoweledge to see full picture and make great decisions regarding strategy/architecture.</span>
+    </p>
+    <p class="about-line">
+      <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="chess pawn"><rect x="7" y="2" width="2" height="1" fill="#2c47a8"/><rect x="6" y="3" width="4" height="2" fill="#2c47a8"/><rect x="7" y="5" width="2" height="1" fill="#2c47a8"/><rect x="5" y="6" width="6" height="1" fill="#3d5fd0"/><rect x="6" y="7" width="4" height="2" fill="#2c47a8"/><rect x="5" y="9" width="6" height="1" fill="#2c47a8"/><rect x="4" y="10" width="8" height="1" fill="#3d5fd0"/><rect x="3" y="11" width="10" height="1" fill="#2c47a8"/><rect x="2" y="12" width="12" height="2" fill="#3d5fd0"/></svg>
+      <span>I like playing chess/strategy videogames and learning about different niches of tech.</span>
+    </p>
+    <p class="about-line">
+      <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="rising bar chart"><rect x="2" y="9" width="3" height="4" fill="#8ea3e0"/><rect x="6" y="6" width="3" height="7" fill="#3d5fd0"/><rect x="10" y="3" width="3" height="10" fill="#2c47a8"/><rect x="1" y="13" width="14" height="1" fill="#565b6e"/></svg>
+      <span>I recently played a VC simulation game where you need to choose startups to invest in based on their potential. As a startup founder it gave me perspective of VCs and learnt more about metrics of a VC fund. Many of my runs ended up on weekly leaderboards.</span>
+    </p>
   </section>
 
   <section class="page" id="projects">
@@ -454,11 +501,23 @@
     <h2>Contact</h2>
     <p>Feel free to reach out if you have any questions or want to chat!</p>
 
-    <ul>
-      <li>Email: <a href="mailto:akim.kern@gmail.com">akim.kern@gmail.com</a></li>
-      <li>GitHub: <a href="https://github.com/Akomon333">github.com/Akomon333</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/akim-kern-9a1850343">linkedin.com/in/akim-kern-9a1850343</a></li>
-      <li>Lichess: <a href="https://lichess.org/@/Akomon777">lichess.org/@/Akomon777</a></li>
+    <ul class="links">
+      <li>
+        <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="message bubble"><rect x="2" y="1" width="12" height="1" fill="#3d5fd0"/><rect x="2" y="2" width="1" height="1" fill="#3d5fd0"/><rect x="13" y="2" width="1" height="1" fill="#3d5fd0"/><rect x="2" y="3" width="1" height="1" fill="#3d5fd0"/><rect x="4" y="3" width="8" height="1" fill="#8ea3e0"/><rect x="13" y="3" width="1" height="1" fill="#3d5fd0"/><rect x="2" y="4" width="1" height="1" fill="#3d5fd0"/><rect x="13" y="4" width="1" height="1" fill="#3d5fd0"/><rect x="2" y="5" width="1" height="1" fill="#3d5fd0"/><rect x="4" y="5" width="8" height="1" fill="#8ea3e0"/><rect x="13" y="5" width="1" height="1" fill="#3d5fd0"/><rect x="2" y="6" width="1" height="1" fill="#3d5fd0"/><rect x="13" y="6" width="1" height="1" fill="#3d5fd0"/><rect x="2" y="7" width="1" height="1" fill="#3d5fd0"/><rect x="4" y="7" width="5" height="1" fill="#8ea3e0"/><rect x="13" y="7" width="1" height="1" fill="#3d5fd0"/><rect x="2" y="8" width="1" height="1" fill="#3d5fd0"/><rect x="13" y="8" width="1" height="1" fill="#3d5fd0"/><rect x="2" y="9" width="4" height="1" fill="#3d5fd0"/><rect x="7" y="9" width="7" height="1" fill="#3d5fd0"/><rect x="4" y="10" width="4" height="1" fill="#3d5fd0"/><rect x="5" y="11" width="2" height="1" fill="#3d5fd0"/></svg>
+        <span>Email: <a href="mailto:akim.kern@gmail.com">akim.kern@gmail.com</a></span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="code branch"><rect x="4" y="3" width="1" height="10" fill="#3d5fd0"/><rect x="5" y="6" width="6" height="1" fill="#3d5fd0"/><rect x="11" y="4" width="1" height="3" fill="#3d5fd0"/><rect x="3" y="2" width="3" height="3" fill="#2c47a8"/><rect x="3" y="11" width="3" height="3" fill="#2c47a8"/><rect x="10" y="2" width="3" height="3" fill="#2c47a8"/></svg>
+        <span>GitHub: <a href="https://github.com/Akomon333">github.com/Akomon333</a></span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="profile card"><rect x="1" y="2" width="14" height="12" fill="#3d5fd0"/><rect x="2" y="3" width="12" height="10" fill="#ffffff"/><rect x="4" y="5" width="2" height="2" fill="#2c47a8"/><rect x="3" y="8" width="4" height="2" fill="#2c47a8"/><rect x="8" y="5" width="4" height="1" fill="#8ea3e0"/><rect x="8" y="7" width="4" height="1" fill="#8ea3e0"/><rect x="8" y="9" width="3" height="1" fill="#8ea3e0"/></svg>
+        <span>LinkedIn: <a href="https://www.linkedin.com/in/akim-kern-9a1850343">linkedin.com/in/akim-kern-9a1850343</a></span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 16 16" role="img" aria-label="chess board"><rect x="1" y="1" width="14" height="14" fill="#2c47a8"/><rect x="2" y="2" width="3" height="3" fill="#3d5fd0"/><rect x="2" y="5" width="3" height="3" fill="#ffffff"/><rect x="2" y="8" width="3" height="3" fill="#3d5fd0"/><rect x="2" y="11" width="3" height="3" fill="#ffffff"/><rect x="5" y="2" width="3" height="3" fill="#ffffff"/><rect x="5" y="5" width="3" height="3" fill="#3d5fd0"/><rect x="5" y="8" width="3" height="3" fill="#ffffff"/><rect x="5" y="11" width="3" height="3" fill="#3d5fd0"/><rect x="8" y="2" width="3" height="3" fill="#3d5fd0"/><rect x="8" y="5" width="3" height="3" fill="#ffffff"/><rect x="8" y="8" width="3" height="3" fill="#3d5fd0"/><rect x="8" y="11" width="3" height="3" fill="#ffffff"/><rect x="11" y="2" width="3" height="3" fill="#ffffff"/><rect x="11" y="5" width="3" height="3" fill="#3d5fd0"/><rect x="11" y="8" width="3" height="3" fill="#ffffff"/><rect x="11" y="11" width="3" height="3" fill="#3d5fd0"/></svg>
+        <span>Lichess: <a href="https://lichess.org/@/Akomon777">lichess.org/@/Akomon777</a></span>
+      </li>
     </ul>
   </section>
 
